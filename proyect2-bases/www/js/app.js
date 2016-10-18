@@ -5,9 +5,9 @@ var app = angular.module('todoApp', ['ngRoute'])
 
 
         $routeProvider
-            .when('/', {
-                templateUrl: 'views/home.html',
-                controller: 'homeController'
+            .when('/login', {
+                templateUrl: 'templates/login.html',
+                controller: 'loginController'
             })
             .when('/builds', {
                 templateUrl: 'views/builds.html',
@@ -18,14 +18,16 @@ var app = angular.module('todoApp', ['ngRoute'])
                 controller: 'adminController'
             })
             .otherwise({
-                redirectTo: '/'
+                redirectTo: '/login'
             });
 
     }])
 
 
 
-
+    app.controller('loginController', function() {
+        
+    })
 
 
 
