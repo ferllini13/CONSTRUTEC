@@ -33,3 +33,11 @@ var app = angular.module('App', ['ngRoute'])
     app.controller('SignUpCtrl', function() {
         
     })
+
+    
+    
+App.directive('menu', function() {
+  return {
+     templateUrl: 'templates/menu.html',
+      controller:"MenuCtrl"
+  };});
