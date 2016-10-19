@@ -1,6 +1,6 @@
 var app = angular.module('todoApp', ['ngRoute'])
 
-    app.config(['$routeProvider', function($routeProvider) {
+    app.config(['$routeProvider', function($routeProvider, $urlRouterProvider) {
 
 
 
@@ -20,6 +20,7 @@ var app = angular.module('todoApp', ['ngRoute'])
             .otherwise({
                 redirectTo: '/login'
             });
+            //$urlRouterProvider.otherwise('/login');
 
     }])
 
