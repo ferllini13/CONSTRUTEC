@@ -22,6 +22,10 @@
 
 .login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
 
+.height-background {
+    height: 700px;
+}
+
 .backgroundLogin {
     background: #092756;
     height: 700px;
@@ -198,7 +202,9 @@
 
 
 .fond{
-    background-color: darkgray
+    background-color: darkgray;
+    position: absolute;
+    height: 700px;
     
 }
 
