@@ -36,9 +36,9 @@
     background: #8999A8;
 }
 
-input { 
+.input-login { 
 	width: 100%; 
-	margin-bottom: 10px; 
+	margin-bottom: 1px; 
 	background: rgba(0,0,0,0.3);
 	border: none;
 	outline: none;
@@ -55,7 +55,29 @@ input {
 	-ms-transition: box-shadow .5s ease;
 	transition: box-shadow .5s ease;
 }
-input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.6), 0 1px 1px rgba(255,255,255,0.2); }
+.input-login:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.6), 0 1px 1px rgba(255,255,255,0.2); }
+
+.input-user {
+    width: 100%; 
+	margin-bottom: 10px; 
+	background: rgba(255,255,255,0.3);
+	border: none;
+	outline: none;
+	padding: 10px;
+	font-size: 13px;
+    color: #ffffff;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+	border: 1px solid rgba(0,0,0,0.3);
+	border-radius: 4px;
+	box-shadow: inset 0 -5px 45px rgba(255,255,255,0.2), 0 1px 1px rgba(255,255,255,0.2);
+	-webkit-transition: box-shadow .5s ease;
+	-moz-transition: box-shadow .5s ease;
+	-o-transition: box-shadow .5s ease;
+	-ms-transition: box-shadow .5s ease;
+	transition: box-shadow .5s ease;
+}
+
+.input-user:focus { box-shadow: inset 0 -5px 45px rgba(200,200,200,0.6), 0 1px 1px rgba(255,255,255,0.2); }
 
 
 .menu-content-custom {

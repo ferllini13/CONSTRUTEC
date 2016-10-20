@@ -7,18 +7,16 @@ var app = angular.module('App', ['ngRoute'])
                 templateUrl: 'templates/login.html',
                 controller: 'loginController'
             })
-            .when('/builds', {
-                templateUrl: 'views/builds.html',
-                controller: 'buildsController'
+            .when('/home', {
+                templateUrl: 'templates/home.html',
+                controller: 'HomeCtrl'
             })
-            .when('/admin', {
-                templateUrl: 'views/admin.html',
-                controller: 'adminController'
-            })
+            
             .when('/signUp', {
                 controller: 'SignUpCtrl',
                 templateUrl:'templates/signUp.html'
             })
+            
              .otherwise({
                 redirectTo: '/login'
             });
@@ -37,7 +35,7 @@ var app = angular.module('App', ['ngRoute'])
 
     
     
-App.directive('menu', function() {
+app.directive('menu', function() {
   return {
      templateUrl: 'templates/menu.html',
       controller:"MenuCtrl"
