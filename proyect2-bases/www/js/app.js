@@ -40,3 +40,6 @@ app.directive('menu', function() {
      templateUrl: 'templates/menu.html',
       controller:"MenuCtrl"
   };});
+/* 	margin: -150px 0 0 -150px;
+	width:300px;
+	height:300px; */
