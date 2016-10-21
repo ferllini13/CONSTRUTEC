@@ -198,12 +198,11 @@
 
 .fond{
     background-color: darkgray;
-    height:1510px;
+    min-height:680px;
 }
 .backgroundLogin.fond.scroll{
     margin-top:20px;
     width: 100%;
-    min-height: 700px
 
 
 }
