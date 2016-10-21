@@ -16,11 +16,19 @@ var app = angular.module('App', ['ngRoute'])
                 controller: 'SignUpCtrl',
                 templateUrl:'templates/signUp.html'
             })
+        
+            .when('/about',{
+                controller: 'AboutCtrl',
+                templateUrl:'templates/about.html'
+                })
+            .when('/materials',{
+                controller: 'MaterialsCtrl',
+                templateUrl:'templates/materials.html'
+                })
             
              .otherwise({
                 redirectTo: '/login'
             });
-            //$urlRouterProvider.otherwise('/login');
 
     }])
 
