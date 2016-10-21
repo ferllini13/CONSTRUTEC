@@ -25,12 +25,56 @@ var app = angular.module('App', ['ngRoute'])
                 controller: 'MaterialsCtrl',
                 templateUrl:'templates/materials.html'
                 })
+            .when('/works',{
+                controller: 'WorksCtrl',
+                templateUrl:'templates/works.html'
+                })
+            
+            .when('/addWork',{
+                controller: 'AddWorkCtrl',
+                templateUrl:'templates/addWork.html'
+                })
+            .when('/stages',{
+                controller: 'StagesCtrl',
+                templateUrl:'templates/stages.html'
+                })
+            .when('/addStage',{
+                controller: 'AddStageCtrl',
+                templateUrl:'templates/addStage.html'
+                })
+            .when('/queries',{
+                controller: 'QueriesCtrl',
+                templateUrl:'templates/queries.html'
+                })
+            
             
              .otherwise({
                 redirectTo: '/login'
             });
 
     }])
+    
+    
+    app.controller('WorksCtrl', function() {
+        
+    })
+
+    app.controller('AddWorkCtrl', function() {
+        
+    })
+    
+    app.controller('StagesCtrl', function() {
+        
+    })
+    
+    app.controller('AddStagesCtrl', function() {
+        
+    })
+    
+    app.controller('QueriesCtrl', function() {
+        
+    })
+    
 
     app.controller('loginController', function() {
         
