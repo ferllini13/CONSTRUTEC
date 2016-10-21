@@ -1,5 +1,7 @@
+    <div class="backgroundLogin ">
         <div class="login"> 
-            <h1>CTEC Register</h1>
+<br><br><br><br>
+            <h1>EPATEC Register</h1>
             <form autocomplete="off" id="myForm" method="post" ng-controller="SignUpCtrl">
                 <input  type="text" placeholder=" Name" required="required" ng-model="signUp.Uname" value="" class="input-login" style="color:#ffffff">
                 <input type="text" placeholder=" Last Name 1" required="required" ng-model="signUp.lname1" value="" class="input-login" style="color:#ffffff">
@@ -15,8 +17,8 @@
                     <select  ng-model="type" required="required" class="form-control" id="sel1">
                         <option value="0">Arquitect/Engineere</option>
                         <option value="1">Client</option>
-			            <option value="3">General User</option>
-			            <option value="4">Administrator</option>
+			<option value="3">General User</option>
+			<option value="4">Administrator</option>
                     </select>
                 </div>
                 <input type="submit" class="btn btn-primary btn-block btn-large nounderline" ng-click="createUser(type)" value="Sign Up"> 
@@ -24,4 +26,5 @@
                 <li> <a ALIGN="center" href="#/login">Sign In </a></li>   
             </form>
         </div>
+      </div>
 
