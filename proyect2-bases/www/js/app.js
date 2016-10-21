@@ -1,4 +1,4 @@
-var app = angular.module('App', ['ngRoute'])
+var app = angular.module('App', ['ngRoute']);
 
     app.config(['$routeProvider', function($routeProvider, $urlRouterProvider) {
 
@@ -48,7 +48,9 @@ var app = angular.module('App', ['ngRoute'])
 
     }])
     
-    
+    app.controller('MenuCtrl', function() {
+        
+    })  
     app.controller('WorksCtrl', function() {
         
     })
