@@ -41,10 +41,6 @@ function server_request($http, request) {
                 templateUrl:'templates/works.html'
                 })
             
-            .when('/addWork',{
-                controller: 'AddWorkCtrl',
-                templateUrl:'templates/addWork.html'
-                })
             .when('/stages',{
                 controller: 'StagesCtrl',
                 templateUrl:'templates/stages.html'
@@ -138,16 +134,16 @@ function server_request($http, request) {
 
         
     $scope.verificar =  function(login){
-                    var peticion = "listar/clientes/_office/_name/_id/_type/where/_identityNumber/"
+                    var peticion = "ListarClientes/";
                     var request = "";
-                    request = request.concat(ip, peticion, $scope.login.username,"/_password/",$scope.login.password);
+                    request = request.concat(ip, peticion, $scope.login.username,"/",$scope.login.password);
                     console.log("Request es:", request);
                     result = server_request($http, request); 
                     
                             if (result==="[]"){
                                 alert("login erorr")
-                                
                                 }
+        
                             else{
                             var result2 = angular.fromJson(result);
                             console.log("Get Post status 2", result2);
@@ -156,22 +152,6 @@ function server_request($http, request) {
                             if (result2[0]._type===0){
                                 loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),0);   
                                 $location.path('/home');
-                            }
-                            else if(result2[0]._type===1){
-                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),1);   
-                                $state.go('myProducts');
-                            }
-                            else if(result2[0]._type===2){
-                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),2);     
-                                $state.go('orders');
-                            }
-                            else if(result2[0]._type===3){
-                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),3);   
-                                $state.go('stadistic');
-                            }
-                            else if(result2[0]._type===4){
-                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),4);   
-                                $state.go('stadistic');
                             }
                             
                             }
@@ -190,9 +170,9 @@ function server_request($http, request) {
     $scope.createUser = function(type,icode){ 
         /* verificar que usuario no exista*/
 
-                var peticion = "RegistrarIngeniero?datos=";
+                var peticion = "ListarClientes/";
 
-                //request = request.concat(ip, peticion,$scope.signUp.Uname,"/",icode,"/",$scope.signUp.inum,"/",$scope.signUp.phone);
+                request = request.concat(ip, peticion,$scope.signUp.Uname,"/",icode,"/",$scope.signUp.inum,"/",$scope.signUp.phone);
                 console.log("Request es:", request);
         
                 result = server_request($http, request); 
@@ -207,7 +187,7 @@ function server_request($http, request) {
                                   
         function registry(type){
                             var request2 = "";
-                            var peticion2 = "RegistrarIngeniero?datos=";
+                            var peticion2 = "RegistrarIngeniero/";
                             var newid = new Date().getTime().toString().slice(4,14);
                             peticion2 = peticion2.concat(peticion,newid,$scope.signUp.Uname,"/",icode,"/",$scope.signUp.inum,"/",$scope.signUp.phone);
                                 
@@ -226,9 +206,6 @@ function server_request($http, request) {
                             };
     })
         
-        
-
-    
     
 .service('loginData', function() {
  return {
@@ -236,18 +213,15 @@ function server_request($http, request) {
    getLogin: function() {
      return this.login;
    },
-   updateLogin: function(login,id,name,menutype) {
-     this.login = login;
-    this.login.id=id;
+   updateLogin: function(login,id,name,username,menutype) {
+       this.login = login;
+       this.login.id=id;
        this.login.name=name;
+       this.login.username=username;
        this.login.menutype=menutype;
-       this.login.office=office;
    }
  }
 })    
-    
-    
-    
     
 app.directive('menu', function() {
   return {
