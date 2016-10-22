@@ -64,30 +64,32 @@ $scope.client=false;
 $scope.general=false;
 $scope.admi=false;
 $scope.ifMenu=false;
-
-
-if (typeof loginData.menutype != 'undefined')
-    {
-        $scope.ifMenu = true;
-
+    
 console.log($scope.login.menutype);
+
+
+try{
+    $scope.ifMenu = true;
 var type= $scope.login.menutype;
 
 for ( i= 0; i< type.length; i++ )  {  
- if (type[i]===0){
+ if (type[i]==0){
      $scope.engine=true;
  }
-  else if (type[i]===1){
+  else if (type[i]==1){
      $scope.client=true;
  }
-  else if (type[i]===2){
+  else if (type[i]==2){
      $scope.general=true;
  }
- else if (type[i]===3){
+ else if (type[i]==3){
      $scope.admi=true;
  }
 }
-    }
+    }catch(err) {}
+    
+    
+    
 })
 
 app.controller('MaterialsCtrl', function($http, $scope) {
@@ -115,7 +117,6 @@ app.controller('MaterialsCtrl', function($http, $scope) {
             }
             var result3 = $scope.items;
             console.log("Result3 ", result3);
-        
 
  });
       };
@@ -490,6 +491,7 @@ function updateRoles(login,id,name, username, result,loginData,$location){
 
     for(i=0; i<result4.length;i++){
             rol.push(result4[i].type);
+            console.log("RESULT",result4[i].type.toString());
                                     }
 
             if (rol[0]===0){  
