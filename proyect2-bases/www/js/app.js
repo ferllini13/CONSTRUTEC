@@ -74,7 +74,7 @@ function server_request($http, request) {
     $scope.client=false;
     $scope.general=false;
     $scope.admi=false;
-    $scope.ifMenu=false;
+    $scope.ifMenu=true;
     
         
     if (typeof loginData.menutype != 'undefined')
