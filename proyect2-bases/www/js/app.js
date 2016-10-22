@@ -48,9 +48,28 @@ var app = angular.module('App', ['ngRoute']);
 
     }])
     
-    app.controller('MenuCtrl', function() {
+    app.controller('MenuCtrl', function($scope,loginData ) {
+    $scope.login = loginData.getLogin();
+    $scope.engine=false;
+    $scope.client=false;
+    $scope.general=false;
+    $scope.admi=false;
+    console.log($scope.login.menutype);
         
-    })  
+     
+     if ($scope.login.menutype===0){
+         $scope.engine=true;
+     }
+      else if ($scope.login.menutype===1){
+         $scope.client=true;
+     }
+      else if ($scope.login.menutype===2){
+         $scope.general=true;
+     }
+     else if ($scope.login.menutype===3){
+         $scope.admi=true;
+     }
+ })
     app.controller('WorksCtrl', function() {
         
     })
@@ -73,7 +92,40 @@ var app = angular.module('App', ['ngRoute']);
     
 
     app.controller('loginController', function() {
-        
+        $scope.login = {ip:'',username:'', password:'',name:'',id:'',code:'' ,menutype:'' };
+        var form = document.getElementById("myForm");  
+        form.onsubmit = function(){
+        form.reset();
+      }
+    $scope.verificar =  function(login){
+         
+                    var peticion = "listar/clientes/_office/_name/_id/_type/where/_identityNumber/"
+                    var request = "";
+                    request = request.concat(ip, peticion, $scope.login.username,"/_password/",$scope.login.password);
+                    console.log("Request es:", request);
+                $http.get(request)
+                            .then(function (response) {
+                            console.log('Get Post', response);
+                            console.log("Get Post status", response.data);
+                            var data = response.data;
+                            var result = data.substring(70, data.length - 9);
+                            console.log("Get Post status", result);
+                    
+                            if (result==="[]"){
+                                alert("login erorr")
+                                }
+                            else{
+                            var result2 = angular.fromJson(result);
+                            console.log("Get Post status 2", result2);
+                                
+                            
+                            if (result2[0]._type===0){
+                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),0);   
+                                $state.go('home');    
+                            }
+                } 
+                    );
+    };
     })
     
     
@@ -81,6 +133,25 @@ var app = angular.module('App', ['ngRoute']);
         
     })
 
+    
+    
+.service('loginData', function() {
+ return {
+   login: {},
+   getLogin: function() {
+     return this.login;
+   },
+   updateLogin: function(login,id,name,menutype) {
+     this.login = login;
+    this.login.id=id;
+       this.login.name=name;
+       this.login.menutype=menutype;
+       this.login.office=office;
+   }
+ }
+})    
+    
+    
     
     
 app.directive('menu', function() {
