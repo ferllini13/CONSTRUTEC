@@ -23,7 +23,7 @@
                 </div>
              <input ng-if="type==0" type="text" placeholder=" Engineere Code " required="required" ng-model="signUp.icode" value="" class="input-login" style="color:#ffffff">
             <br><br>    
-            <input type="submit" class="btn btn-primary btn-block btn-large nounderline" ng-click="createUser(type)" value="Sign Up"> 
+            <input type="submit" class="btn btn-primary btn-block btn-large nounderline" ng-click="createUser(type,signUp.icode)" value="Sign Up"> 
                 
                 <li> <a ALIGN="center" href="#/login">Sign In </a></li>   
             </form>
