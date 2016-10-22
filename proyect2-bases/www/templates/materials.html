@@ -1,6 +1,6 @@
 <div class="container" >
         <div class="jumbotron">
-        <h2 ALIGN="center"> Select Products</h2>
+        <h2 ALIGN="center"> Select Materials</h2>
             
         <nav>
             <input type="search"
@@ -20,6 +20,6 @@
            {{item.letter || (item._description+ ' ('+ item._id+ ')'+'  ; Department :' +  item._office + '  ;  Tax : ' +item. _nonTaxable+ '  ; In Stock: ' +item._amount )}}
               <img ng-if="!item.isLetter" src="img/shopping_cart_plus.png" class="shop-plus" ng-click="addItemCart(item._id)"></h4></li>
            </ul>
-            <button type="button" class="btn btn-info btn-block" ng-click="update()"> Update Products</button>
+            <button type="button" class="btn btn-info btn-block" ng-click="update()"> Update Materials</button>
     </div>
 </div>

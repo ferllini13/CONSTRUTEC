@@ -1,15 +1,15 @@
-    <div class="backgroundLogin ">
+div class="backgroundLogin ">
         <div class="login"> 
 <br><br><br><br>
             <h1>CTEC Register</h1>
             <form autocomplete="off" id="myForm" method="post" ng-controller="SignUpCtrl">
                 <input  type="text" placeholder=" Name" required="required" ng-model="signUp.Uname" value="" class="input-login" style="color:#ffffff">
-                <input type="text" placeholder=" Last Name 1" required="required" ng-model="signUp.lname1" value="" class="input-login" style="color:#ffffff">
-                <input type="text" placeholder=" Las Name 2" required="required" ng-model="signUp.lname2" value="" class="input-login" style="color:#ffffff">
+                <input type="text" placeholder=" Last Name" required="required" ng-model="signUp.lname1" value="" class="input-login" style="color:#ffffff">
                 <input type="text" placeholder=" Phone" required="required" ng-model="signUp.phone" value="" class="input-login" style="color:#ffffff">
                 <input type="text" placeholder=" Address" required="required" ng-model="signUp.address" value="" class="input-login" style="color:#ffffff">
                 <input type="text" placeholder=" Identity Number " required="required" ng-model="signUp.inum" value="" class="input-login" style="color:#ffffff">
                 <input  type="text" placeholder=" Birth Date (DD-MM-YY)" required="required" ng-model="signUp.bdate" value="" class="input-login" style="color:#ffffff">
+                <input  type="text" placeholder=" User Name" required="required" ng-model="signUp.UserName" value="" class="input-login" style="color:#ffffff">
                 <input type="password" placeholder="Password" required="required" ng-model="signUp.password" value="" class="input-login" style="color:#ffffff">
                 
                 <div class="form-group" style="color:#ffffff">
@@ -18,7 +18,7 @@
                          <option value="0">Arquitect/Engineere</option>
                          <option value="1">Client</option>
                          <option value="3">General User</option>
-			             <option value="4">Administrator</option>
+                   <option value="4">Administrator</option>
                     </select>
                 </div>
              <input ng-if="type==0" type="text" placeholder=" Engineere Code " required="required" ng-model="signUp.icode" value="" class="input-login" style="color:#ffffff">
@@ -29,4 +29,3 @@
             </form>
         </div>
       </div>
-

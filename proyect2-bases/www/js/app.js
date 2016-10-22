@@ -1,6 +1,6 @@
 var app = angular.module('App', ['ngRoute']);
 
-var ip = "192.108.255.5";
+var ip = "http://192.168.0.15:8080/Construtec.asmx/";
 
 function server_request($http, request) {
      $http.get(request)
@@ -93,6 +93,20 @@ function server_request($http, request) {
          $scope.admi=true;
      }
  })
+    
+    app.controller('MaterialsCtrl', function() {
+        var peticion = "ConsutaMateriales";
+        var request = "";
+        request = request.concat(ip, peticion);
+        console.log("Request es:", request);
+        result = server_request($http, request); 
+        
+        var result2 = angular.fromJson(result);
+        console.log("Get Post status 2", result2);
+        
+        
+    })
+    
     app.controller('WorksCtrl', function() {
         
     })
@@ -141,7 +155,7 @@ function server_request($http, request) {
                             
                             if (result2[0]._type===0){
                                 loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),0);   
-                                $state.go('home'); 
+                                $location.path('/home');
                             }
                             else if(result2[0]._type===1){
                                 loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),1);   
@@ -169,69 +183,47 @@ function server_request($http, request) {
     })
     
     
-    app.controller('SignUpCtrl', function($scope) {
+    app.controller('SignUpCtrl', function($scope, $http, $location) {
     var form = document.getElementById("myForm");
-    var ip = "http://webserviceepatec.azurewebsites.net/EPATEC.asmx/Parsear?frase=";
     var request = "";
      
     $scope.createUser = function(type,icode){ 
         /* verificar que usuario no exista*/
 
-                var peticion = "listar/clientes/_id/where/_identityNumber/"
+                var peticion = "RegistrarIngeniero?datos=";
 
-                request = request.concat(ip, peticion,$scope.signUp.inum);
+                //request = request.concat(ip, peticion,$scope.signUp.Uname,"/",icode,"/",$scope.signUp.inum,"/",$scope.signUp.phone);
                 console.log("Request es:", request);
         
-                $http.get(request)
-                            .then(function (response) {
-                            console.log('Get Post', response);
-                            console.log("Get Post status", response.data);
-                            var data = response.data;
-                            var result = data.substring(70, data.length - 9);
-                            console.log("Get Post status", result);
-                            var result2 = angular.fromJson(result);
-                            console.log("Get Post status 2", result2); 
+                result = server_request($http, request); 
                     
                             if (result2.length===0){
                                 registry(type);
                             }else{
-                                alert("Identity number already in use")
+                                alert("User Name number already in use")
                             }                         
              
-                    })}
+                }
                                   
         function registry(type){
                             var request2 = "";
-                            var peticion2 = "crear/cliente/_id/"
+                            var peticion2 = "RegistrarIngeniero?datos=";
                             var newid = new Date().getTime().toString().slice(4,14);
-                            peticion2 = peticion2.concat(newid,"/_name/",$scope.signUp.Uname.replace(" ","%20"),"/_lastName1/", $scope.signUp.lname1,"/_lastName2/",$scope.signUp.lname2,"/_cellPhone/",$scope.signUp.phone,"/_identityNumber/",$scope.signUp.inum,"/_residenceAddress/",$scope.signUp.address.replace(" ","%20"),"/_birthDate/",$scope.signUp.bdate,"/_type/",type,"/_password/",$scope.signUp.password);
+                            peticion2 = peticion2.concat(peticion,newid,$scope.signUp.Uname,"/",icode,"/",$scope.signUp.inum,"/",$scope.signUp.phone);
                                 
                             request2 = request2.concat(ip, peticion2);
                             console.log("Request es:", request2);
-                                
-                            $http.get(request2)
-                                .then(function (response) {
-                                console.log("enty");
-                                console.log('Get Post', response);
-                                console.log("Get Post status", response.data);
-                                var data = response.data;
-                                var result = data.substring(70, data.length - 9);
-                                console.log("Get Post status", result);
+            
+                            result = server_request($http, request);
                                 if (result==="no se pudo conectar"){
                                     alert("check the data");
                                     
                                 }else{
-                                    if (type=1){
-                                        
-                                        addseller(newid);
-                                    }
-                                    else{
                                         
                                     form.reset();
-                                    $state.go('login');
-                                }}
-                            });
-                                 };
+                                    $location.path('/login');
+                                }
+                            };
     })
         
         
