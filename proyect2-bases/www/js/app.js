@@ -12,13 +12,8 @@ function server_request($http, request) {
                 console.log("Get Post status", result);
                 return result;
          
-     }
-                      
-    );
-         
+     });       
     }
-
-
 
     app.config(['$routeProvider', function($routeProvider, $urlRouterProvider) {
 
@@ -121,7 +116,7 @@ function server_request($http, request) {
 
     app.controller('loginController', function($scope) {
         console.log(ip);
-        $scope.login = {ip:'',username:'', password:'',name:'',id:'',code:'' ,menutype:'' };
+        $scope.login = {username:'', password:'',name:'',id:'',code:'' ,menutype:'' };
         var form = document.getElementById("myForm");  
         form.onsubmit = function(){
         form.reset();
@@ -174,9 +169,72 @@ function server_request($http, request) {
     })
     
     
-    app.controller('SignUpCtrl', function() {
+    app.controller('SignUpCtrl', function($scope) {
+    var form = document.getElementById("myForm");
+    var ip = "http://webserviceepatec.azurewebsites.net/EPATEC.asmx/Parsear?frase=";
+    var request = "";
+     
+    $scope.createUser = function(type,icode){ 
+        /* verificar que usuario no exista*/
+
+                var peticion = "listar/clientes/_id/where/_identityNumber/"
+
+                request = request.concat(ip, peticion,$scope.signUp.inum);
+                console.log("Request es:", request);
         
+                $http.get(request)
+                            .then(function (response) {
+                            console.log('Get Post', response);
+                            console.log("Get Post status", response.data);
+                            var data = response.data;
+                            var result = data.substring(70, data.length - 9);
+                            console.log("Get Post status", result);
+                            var result2 = angular.fromJson(result);
+                            console.log("Get Post status 2", result2); 
+                    
+                            if (result2.length===0){
+                                registry(type);
+                            }else{
+                                alert("Identity number already in use")
+                            }                         
+             
+                    })}
+                                  
+        function registry(type){
+                            var request2 = "";
+                            var peticion2 = "crear/cliente/_id/"
+                            var newid = new Date().getTime().toString().slice(4,14);
+                            peticion2 = peticion2.concat(newid,"/_name/",$scope.signUp.Uname.replace(" ","%20"),"/_lastName1/", $scope.signUp.lname1,"/_lastName2/",$scope.signUp.lname2,"/_cellPhone/",$scope.signUp.phone,"/_identityNumber/",$scope.signUp.inum,"/_residenceAddress/",$scope.signUp.address.replace(" ","%20"),"/_birthDate/",$scope.signUp.bdate,"/_type/",type,"/_password/",$scope.signUp.password);
+                                
+                            request2 = request2.concat(ip, peticion2);
+                            console.log("Request es:", request2);
+                                
+                            $http.get(request2)
+                                .then(function (response) {
+                                console.log("enty");
+                                console.log('Get Post', response);
+                                console.log("Get Post status", response.data);
+                                var data = response.data;
+                                var result = data.substring(70, data.length - 9);
+                                console.log("Get Post status", result);
+                                if (result==="no se pudo conectar"){
+                                    alert("check the data");
+                                    
+                                }else{
+                                    if (type=1){
+                                        
+                                        addseller(newid);
+                                    }
+                                    else{
+                                        
+                                    form.reset();
+                                    $state.go('login');
+                                }}
+                            });
+                                 };
     })
+        
+        
 
     
     
