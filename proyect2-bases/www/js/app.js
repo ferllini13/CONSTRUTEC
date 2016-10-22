@@ -1,5 +1,25 @@
 var app = angular.module('App', ['ngRoute']);
 
+var ip = "192.108.255.5";
+
+function server_request($http, request) {
+     $http.get(request)
+                .then(function (response) {
+                console.log('Get Post', response);
+                console.log("Get Post status", response.data);
+                var data = response.data;
+                var result = data.substring(70, data.length - 9);
+                console.log("Get Post status", result);
+                return result;
+         
+     }
+                      
+    );
+         
+    }
+
+
+
     app.config(['$routeProvider', function($routeProvider, $urlRouterProvider) {
 
         $routeProvider
@@ -54,6 +74,14 @@ var app = angular.module('App', ['ngRoute']);
     $scope.client=false;
     $scope.general=false;
     $scope.admi=false;
+    $scope.ifMenu=false;
+    
+        
+    if (typeof loginData.menutype != 'undefined')
+        {
+            $scope.ifMenu = true;
+            console.log("menutype es: ", loginData.menutype);
+        }
     console.log($scope.login.menutype);
         
      
@@ -91,28 +119,25 @@ var app = angular.module('App', ['ngRoute']);
     })
     
 
-    app.controller('loginController', function() {
+    app.controller('loginController', function($scope) {
+        console.log(ip);
         $scope.login = {ip:'',username:'', password:'',name:'',id:'',code:'' ,menutype:'' };
         var form = document.getElementById("myForm");  
         form.onsubmit = function(){
         form.reset();
       }
+
+        
     $scope.verificar =  function(login){
-         
                     var peticion = "listar/clientes/_office/_name/_id/_type/where/_identityNumber/"
                     var request = "";
                     request = request.concat(ip, peticion, $scope.login.username,"/_password/",$scope.login.password);
                     console.log("Request es:", request);
-                $http.get(request)
-                            .then(function (response) {
-                            console.log('Get Post', response);
-                            console.log("Get Post status", response.data);
-                            var data = response.data;
-                            var result = data.substring(70, data.length - 9);
-                            console.log("Get Post status", result);
+                    result = server_request($http, request); 
                     
                             if (result==="[]"){
                                 alert("login erorr")
+                                
                                 }
                             else{
                             var result2 = angular.fromJson(result);
@@ -121,11 +146,31 @@ var app = angular.module('App', ['ngRoute']);
                             
                             if (result2[0]._type===0){
                                 loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),0);   
-                                $state.go('home');    
+                                $state.go('home'); 
                             }
-                } 
-                    );
-    };
+                            else if(result2[0]._type===1){
+                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),1);   
+                                $state.go('myProducts');
+                            }
+                            else if(result2[0]._type===2){
+                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),2);     
+                                $state.go('orders');
+                            }
+                            else if(result2[0]._type===3){
+                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),3);   
+                                $state.go('stadistic');
+                            }
+                            else if(result2[0]._type===4){
+                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),4);   
+                                $state.go('stadistic');
+                            }
+                            
+                            }
+    }
+
+     $scope.reload=function(){
+         window.location.reload();
+     };
     })
     
     
