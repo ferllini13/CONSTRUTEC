@@ -100,6 +100,7 @@ app.controller('MaterialsCtrl', function($http, $scope) {
     request = request.concat(ip, peticion);
     console.log("Request es:", request);
     $scope.update = function() {
+        itemsFinal=$scope.itemsFinal=[];
     $http.get(request)
             .then(function (response) {
             console.log('Get Post', response);
@@ -112,7 +113,7 @@ app.controller('MaterialsCtrl', function($http, $scope) {
             for(var i in result2) {
             $scope.items.push(result2[i]);
             }
-            var result3 = $scope.items
+            var result3 = $scope.items;
             console.log("Result3 ", result3);
         
 
