@@ -39,6 +39,7 @@ C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\b
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\Microsoft.Owin.Security.Twitter.dll
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\Newtonsoft.Json.dll
+C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\Npgsql.dll
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\Owin.dll
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\System.Web.Helpers.dll
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\System.Web.Mvc.dll
@@ -54,6 +55,8 @@ C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\b
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\Microsoft.ApplicationInsights.xml
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\Npgsql.pdb
+C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\Npgsql.xml
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\System.Web.Helpers.xml
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\System.Web.Mvc.xml
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\System.Web.Optimization.xml
@@ -77,6 +80,6 @@ C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\b
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\obj\Debug\Proyecto2.csprojResolveAssemblyReference.cache
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\obj\Debug\Proyecto2.dll
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\obj\Debug\Proyecto2.pdb
+C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\obj\Debug\Proyecto2.csprojResolveAssemblyReference.cache

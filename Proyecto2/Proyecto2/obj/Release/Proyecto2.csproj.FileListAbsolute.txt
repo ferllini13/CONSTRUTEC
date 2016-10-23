@@ -82,3 +82,6 @@ C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\o
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\obj\Release\Proyecto2.pdb
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\Proyecto2.XmlSerializers.dll
 C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\obj\Release\Proyecto2.XmlSerializers.dll
+C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\Npgsql.dll
+C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\Npgsql.pdb
+C:\Users\Usuario\Desktop\TECNOLOGICO\VI Semestre\Proyecto2\Proyecto2\Proyecto2\bin\Npgsql.xml

@@ -90,14 +90,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>08/03/2014 20:33:56</publishTime>
     </File>
+    <File Include="bin/Npgsql.dll">
+      <publishTime>08/23/2016 00:37:34</publishTime>
+    </File>
     <File Include="bin/Owin.dll">
       <publishTime>11/27/2012 13:00:52</publishTime>
     </File>
     <File Include="bin/Proyecto2.dll">
-      <publishTime>10/16/2016 08:42:54</publishTime>
+      <publishTime>10/22/2016 18:32:12</publishTime>
     </File>
     <File Include="bin/Proyecto2.XmlSerializers.dll">
-      <publishTime>10/16/2016 08:43:02</publishTime>
+      <publishTime>10/22/2016 18:32:15</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>06/18/2015 20:19:46</publishTime>
