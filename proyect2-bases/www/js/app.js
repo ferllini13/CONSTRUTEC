@@ -197,7 +197,12 @@ app.controller('MaterialsCtrl', function($http, $scope) {
 
 });
 
-app.controller('WorksCtrl', function($http, $scope, loginData) {
+app.controller('WorksCtrl', function($http, $scope, workData) {
+    
+    $scope.stages = function(id) {
+        workData.updateWork(id);
+        $location.path('/stages');
+    };
    var peticion = "ListarProyectos";
     var request = "";
     var login = loginData.getLogin();
@@ -311,12 +316,11 @@ app.controller('WorksCtrl', function($http, $scope, loginData) {
 
 })
 
-app.controller('StagesCtrl', function() {
+app.controller('StagesCtrl', function($http, $scope, workData) {
     var peticion = "ListarEtapasPorProyecto?";
     var request = "";
-    var login = loginData.getLogin();
-    var id = login.id;
-    console.log("id es: ", id);
+    
+    var id = workData.getWork().id;
     $scope.items = [];
     itemsFinal=$scope.itemsFinal=[];
                
@@ -582,7 +586,23 @@ updateLogin: function(login,id,name,username,menutype) {
    this.login.menutype=menutype;
 }
 }
-})    
+}) 
+
+
+
+
+.service('workData', function() {
+return {
+work: {},
+getWork: function() {
+ return this.work;
+},
+updateWork: function(id) {
+   this.work.id=id;
+}
+}
+})  
+
 
 app.directive('menu', function() {
 return {
