@@ -24,7 +24,7 @@ app.config(['$routeProvider', function($routeProvider, $urlRouterProvider) {
         })
         .when('/signUp', {
             controller: 'SignUpCtrl',
-            templateUrl:'templatpes/signUp.html'
+            templateUrl:'templates/signUp.html'
         })
         .when('/about',{
             controller: 'AboutCtrl',
@@ -582,7 +582,7 @@ $scope.createUser = function(type,icode){
                     }); 
             }
 
-    function registry(type,iconde){
+    function registry(type,icode){
                         var request2 = "";
                         var peticion2 = "RegistrarClientes?datos=";
                         var newid = new Date().getTime().toString().slice(4,14);
@@ -596,10 +596,12 @@ $scope.createUser = function(type,icode){
                             
                             
                         }                                        
-                        peticion2 = peticion2.concat(peticion,newid,"/",$scope.signUp.Uname,"/",$scope.signUp.lname1,"/",$scope.signUp.inum,"/",$scope.signUp.password,"/",$scope.signUp.UserName,"/",$scope.signUp.phone,"/",type,"/",newid2);
+                        request2 = request2.concat(ip,peticion2,newid,"/",$scope.signUp.Uname,"/",$scope.signUp.lname1,"/",$scope.signUp.inum,"/",$scope.signUp.password,"/",$scope.signUp.UserName,"/",$scope.signUp.phone,"/",type,"/",newid2);
+        
+                        console.log(request2);
+                        
                         $http.get(request2)
                                 .then(function (response) {
-                                console.username("enty");
                                 console.log('Get Post', response);
                                 console.log("Get Post status", response.data);
                                 var data = response.data;
@@ -607,7 +609,7 @@ $scope.createUser = function(type,icode){
                                 console.log("Get Post status", result);
                        
         
-                            if (result==="[]"){
+                            if (result==="no se pudo establecer la conexión de la base de datos"){
                                 if (type==0){
                                 alert("check the data or change then ingineere code");
                                 }else 
