@@ -338,21 +338,42 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
 })
 
 app.controller('StagesCtrl', function($http, $scope, workData) {
+
+    
     
     
     var work = workData.getWork();
     var work_id = work.id;
     $scope.items = [];
+    var materials = [];
+    
+    var new_stage_id = new Date().getTime().toString().slice(4,14);
+    
     itemsFinal=$scope.itemsFinal=[];
     
+    function addCart(id, description){   //[id, description, amount]
+                    for (var i in materials) {
+                        if (materials[i].id === id) {                            
+                            materials[i].amount++;
+                            return;
+                        }
+                    }
+            var item = {id:id, description: description, amount: 1};
+                    materials.push(item);
+                    materials = JSON.parse(JSON.stringify(materials));
+                    
+                }
     
     
-    $scope.addItemStage = function (id_mat, description_mat) {
+    $scope.sell = function () {
         var peticion = "AsignacionMateriales";
         var request = "";
-          request = request.concat(ip, peticion, "?datos=", work_id, "/",stage_id,"/",id_mat,"/","1/",description_mat);
+          request = request.concat(ip, peticion, "?datos=", work_id, "/",stage_id);
+        for (var i in materials) {
+            request = request.concat("/", materials[i].id, "/", materials[i].amount, "/" materials[i].description)
+        }
             console.log("Request es:", request);
-            itemsFinal=$scope.itemsFinal=[];
+
     $http.get(request)
             .then(function (response) {
             console.log('Get Post', response);
@@ -362,6 +383,12 @@ app.controller('StagesCtrl', function($http, $scope, workData) {
             console.log("Get Post status", result);
             var result2 = angular.fromJson(result);
             console.log("Get Post status 2", result2);
+    })
+    };
+    
+    
+    $scope.addItemStage = function (id_mat, description_mat) {
+        addCart(id_mat, description_mat);
     };
     
                
