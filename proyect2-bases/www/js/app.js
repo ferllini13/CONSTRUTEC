@@ -317,10 +317,11 @@ app.controller('WorksCtrl', function($http, $scope, workData) {
 })
 
 app.controller('StagesCtrl', function($http, $scope, workData) {
-    var peticion = "ListarEtapasPorProyecto?";
+    var peticion = "ListarEtapasPorProyecto";
     var request = "";
     
-    var id = workData.getWork().id;
+    var work = workData.getWork();
+    var id = work.id;
     $scope.items = [];
     itemsFinal=$scope.itemsFinal=[];
                
