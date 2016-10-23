@@ -315,12 +315,12 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
   }
     
   $scope.addWork = function(place,client){
-    var peticion = "RegistrarObra?datos=";
+    var peticion = "RegistrarObra?datos=/";
     var newid = new Date().getTime().toString();
     var request = "";
     var id = login.id;
                
-    request = request.concat(ip, peticion,"/",newid,"/",place,"/",id,"/", client);
+    request = request.concat(ip, peticion,newid,"/",place,"/",client,"/",id);
     console.log("Request es:", request);
     $http.get(request)
             .then(function (response) {
@@ -333,7 +333,6 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
             }else {
             alert("Error: try it again");
     }
-
   })}
 
 })
