@@ -339,17 +339,39 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
 })
 
 app.controller('StagesCtrl', function($http, $scope, workData) {
-    var peticion = "ListarEtapasPorProyecto";
-    var request = "";
+    
     
     var work = workData.getWork();
-    var id = work.id;
+    var work_id = work.id;
     $scope.items = [];
     itemsFinal=$scope.itemsFinal=[];
+    
+    
+    
+    $scope.addItemStage = function (id_mat, description_mat) {
+        var peticion = "AsignacionMateriales";
+        var request = "";
+          request = request.concat(ip, peticion, "?datos=", work_id, "/",stage_id,"/",id_mat,"/","1/",description_mat);
+            console.log("Request es:", request);
+            itemsFinal=$scope.itemsFinal=[];
+    $http.get(request)
+            .then(function (response) {
+            console.log('Get Post', response);
+            console.log("Get Post status", response.data);
+            var data = response.data;
+            var result = data.substring(76, data.length - 9);
+            console.log("Get Post status", result);
+            var result2 = angular.fromJson(result);
+            console.log("Get Post status 2", result2);
+    };
+    
                
-    request = request.concat(ip, peticion, "?datos=", id);
-    console.log("Request es:", request);
+    
     $scope.update = function() {
+        var peticion = "ListarEtapasPorProyecto";
+        var request = "";
+        request = request.concat(ip, peticion, "?datos=", id);
+        console.log("Request es:", request);
         itemsFinal=$scope.itemsFinal=[];
     $http.get(request)
             .then(function (response) {
