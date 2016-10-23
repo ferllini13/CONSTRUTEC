@@ -57,19 +57,16 @@ app.config(['$routeProvider', function($routeProvider, $urlRouterProvider) {
 
 }])
 
-app.controller('MenuCtrl', function($scope,loginData ) {
+app.controller('MenuCtrl', function($scope,loginData) {
 $scope.login = loginData.getLogin();
 console.log($scope.login.username);    
 $scope.engine=false;
 $scope.client=false;
 $scope.general=false;
 $scope.admi=false;
-$scope.ifMenu=true;
-    
-/*
-var type= $scope.login.menutype;
-console.log($scope.login.menutype[0]);    
-if (type[0]!=5){
+$scope.ifMenu=true;   
+
+var type=$scope.login.menutype;    
 for ( i= 0; i< type.length; i++ )  {
  if (type[i]==0){
      $scope.engine=true;
@@ -83,7 +80,7 @@ for ( i= 0; i< type.length; i++ )  {
  else if (type[i]==3){
      $scope.admi=true;
  }
-}*/
+}
     
 })
 
@@ -436,7 +433,7 @@ app.controller('AboutCtrl', function() {
 
 app.controller('loginController', function($scope,$http, loginData, $location) {
     console.log(ip);
-    $scope.login = {username:'', password:'',name:'',id:'',code:'' ,menutype:[5]  }
+    $scope.login = {username:'', password:'',name:'',id:'',code:'' ,menutype:'' }
     var form = document.getElementById("myForm");  
     form.onsubmit = function(){
     form.reset();
@@ -496,7 +493,6 @@ function updateRoles(login,id,name, username, result,loginData,$location){
 
     for(i=0; i<result4.length;i++){
             rol.push(result4[i].type);
-            console.log("RESULT",result4[i].type.toString());
                                     }
 
             if (rol[0]===0){  
