@@ -27,7 +27,7 @@
                     return items;
                     
                 },
-                elimItem: function(item){
+                elimItem: function(item){s">Materis">Materi
                     
                     for (var i in items) {
                         if (items[i]._id === item._id) {

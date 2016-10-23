@@ -7,11 +7,11 @@
             <input type="search"
              placeholder="Search for a product..."
              ng-model="search"
-                ng-bind="search"
-               ng-focus="searchFocused = true"
+             ng-bind="search"
+             ng-focus="searchFocused = true"
              ng-blur="searchFocused = false"
              ng-change="scrollTop()"
-                class="full-width white-background">
+             class="full-width white-background">
         </nav>
       <!--<button  ng-if="search.length"  class="button button-icon ion-android-close input-button"  ng-click="clearSearch()"></button>-->
        <ul ng-init="update()">           

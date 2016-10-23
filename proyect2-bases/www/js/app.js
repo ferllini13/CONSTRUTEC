@@ -1,6 +1,6 @@
 var app = angular.module('App', ['ngRoute']);
 
-var ip = "http://192.168.0.15:8080/Construtec.asmx/";
+var ip = "http://192.168.1.56:8080/Construtec.asmx/";
 
 function server_request($http, request) {
  $http.get(request)
@@ -197,13 +197,13 @@ app.controller('MaterialsCtrl', function($http, $scope) {
 
 });
 
-app.controller('WorksCtrl', function($http, $scope, workData) {
+app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData) {
     
     $scope.stages = function(id) {
         workData.updateWork(id);
         $location.path('/stages');
     };
-   var peticion = "ListarProyectos";
+   var peticion = "ListarProyectos?datos=";
     var request = "";
     var login = loginData.getLogin();
     var id = login.id;
@@ -211,7 +211,7 @@ app.controller('WorksCtrl', function($http, $scope, workData) {
     $scope.items = [];
     itemsFinal=$scope.itemsFinal=[];
                
-    request = request.concat(ip, peticion, "?datos=", id);
+    request = request.concat(ip, peticion, id);
     console.log("Request es:", request);
     $scope.update = function() {
         itemsFinal=$scope.itemsFinal=[];
@@ -505,7 +505,7 @@ function updateRoles(login,id,name, username, result,loginData,$location){
 
             if (rol[0]===0){  
             loginData.updateLogin(login,id,name,username,rol);
-            $location.path('/materials');
+            $location.path('/works');
             }
 
             else if (rol[0]===1){    
@@ -587,8 +587,6 @@ updateLogin: function(login,id,name,username,menutype) {
 }
 }
 }) 
-
-
 
 
 .service('workData', function() {
