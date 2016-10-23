@@ -24,7 +24,7 @@ app.config(['$routeProvider', function($routeProvider, $urlRouterProvider) {
         })
         .when('/signUp', {
             controller: 'SignUpCtrl',
-            templateUrl:'templates/signUp.html'
+            templateUrl:'templatpes/signUp.html'
         })
         .when('/about',{
             controller: 'AboutCtrl',
@@ -551,6 +551,7 @@ function updateRoles(login,id,name, username, result,loginData,$location){
 })
 
 
+
 app.controller('SignUpCtrl', function($scope, $http, $location) {
 var form = document.getElementById("myForm");
 var request = "";
@@ -558,40 +559,66 @@ var request = "";
 $scope.createUser = function(type,icode){ 
     /* verificar que usuario no exista*/
 
-            var peticion = "ListarClientes/";
+            var peticion = "ListarClienteEspecifico?datos=";
 
-            request = request.concat(ip, peticion,$scope.signUp.Uname,"/",icode,"/",$scope.signUp.inum,"/",$scope.signUp.phone);
+            request = request.concat(ip, peticion, $scope.signUp.UserName,"/",$scope.signUp.password);
             console.log("Request es:", request);
 
-            result = server_request($http, request); 
+            $http.get(request)
+            .then(function (response) {
+            console.log('Get Post', response);
+            console.log("Get Post status", response.data);
+            var data = response.data;
+            var result = data.substring(76, data.length - 9);
+            console.log("Get Post status", result);
 
-                        if (result2.length===0){
-                            registry(type);
+        
+                         if (result==="[]"){
+                            registry(type,icode);
                         }else{
                             alert("User Name number already in use")
-                            $location.path('/login');
                         }                         
 
+                    }); 
             }
 
-    function registry(type){
+    function registry(type,iconde){
                         var request2 = "";
-                        var peticion2 = "RegistrarIngeniero/";
+                        var peticion2 = "RegistrarClientes?datos=";
                         var newid = new Date().getTime().toString().slice(4,14);
-                        peticion2 = peticion2.concat(peticion,newid,$scope.signUp.Uname,"/",icode,"/",$scope.signUp.inum,"/",$scope.signUp.phone);
-
-                        request2 = request2.concat(ip, peticion2);
-                        console.log("Request es:", request2);
-
-                        result = server_request($http, request);
-                            if (result==="no se pudo conectar"){
+                        var newid2 ="";
+        
+                        if (type==0){
+                            newid2=icode;   
+                        }else {
+                        newid2 =new Date().getTime().toString().slice(0,10);
+                            
+                            
+                            
+                        }                                        
+                        peticion2 = peticion2.concat(peticion,newid,"/",$scope.signUp.Uname,"/",$scope.signUp.lname1,"/",$scope.signUp.inum,"/",$scope.signUp.password,"/",$scope.signUp.UserName,"/",$scope.signUp.phone,"/",type,"/",newid2);
+                        $http.get(request2)
+                                .then(function (response) {
+                                console.username("enty");
+                                console.log('Get Post', response);
+                                console.log("Get Post status", response.data);
+                                var data = response.data;
+                                var result = data.substring(70, data.length - 9);
+                                console.log("Get Post status", result);
+                       
+        
+                            if (result==="[]"){
+                                if (type==0){
+                                alert("check the data or change then ingineere code");
+                                }else 
                                 alert("check the data");
 
                             }else{
-
                                 form.reset();
                                 $location.path('/login');
                             }
+                            
+                            });
                         };
 })
 
