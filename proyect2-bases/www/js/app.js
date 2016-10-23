@@ -57,37 +57,31 @@ app.config(['$routeProvider', function($routeProvider, $urlRouterProvider) {
 
 }])
 
-app.controller('MenuCtrl', function($scope,loginData ) {
+app.controller('MenuCtrl', function($scope,loginData) {
 $scope.login = loginData.getLogin();
+console.log($scope.login.username);    
 $scope.engine=false;
 $scope.client=false;
 $scope.general=false;
 $scope.admi=false;
-$scope.ifMenu=false;
+$scope.ifMenu=true;   
 
-
-if (typeof loginData.menutype != 'undefined')
-    {
-        $scope.ifMenu = true;
-
-console.log($scope.login.menutype);
-var type= $scope.login.menutype;
-
-for ( i= 0; i< type.length; i++ )  {  
- if (type[i]===0){
+var type=$scope.login.menutype;    
+for ( i= 0; i< type.length; i++ )  {
+ if (type[i]==0){
      $scope.engine=true;
  }
-  else if (type[i]===1){
+  else if (type[i]==1){
      $scope.client=true;
  }
-  else if (type[i]===2){
+  else if (type[i]==2){
      $scope.general=true;
  }
- else if (type[i]===3){
+ else if (type[i]==3){
      $scope.admi=true;
  }
 }
-    }
+    
 })
 
 app.controller('MaterialsCtrl', function($http, $scope) {
@@ -115,7 +109,6 @@ app.controller('MaterialsCtrl', function($http, $scope) {
             }
             var result3 = $scope.items;
             console.log("Result3 ", result3);
-        
 
  });
       };
@@ -437,9 +430,14 @@ app.controller('QueriesCtrl', function() {
 })
 
 
+app.controller('AboutCtrl', function() {
+
+})
+
+
 app.controller('loginController', function($scope,$http, loginData, $location) {
     console.log(ip);
-    $scope.login = {username:'', password:'',name:'',id:'',code:'' ,menutype:[] }
+    $scope.login = {username:'', password:'',name:'',id:'',code:'' ,menutype:'' }
     var form = document.getElementById("myForm");  
     form.onsubmit = function(){
     form.reset();
@@ -569,7 +567,6 @@ $scope.createUser = function(type,icode){
                             }
                         };
 })
-
 
 .service('loginData', function() {
 return {
