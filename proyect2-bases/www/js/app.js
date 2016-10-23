@@ -313,6 +313,28 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
    
     letters.push(letter);
   }
+    
+  $scope.addWork = function(place,client){
+    var peticion = "RegistrarObra?datos=";
+    var newid = new Date().getTime().toString();
+    var request = "";
+    var id = login.id;
+               
+    request = request.concat(ip, peticion,"/",newid,"/",place,"/",id,"/", client);
+    console.log("Request es:", request);
+    $http.get(request)
+            .then(function (response) {
+            console.log('Get Post', response);
+            console.log("Get Post status", response.data);
+            var data = response.data;
+            var result = data.substring(76, data.length - 9);
+            if (result =="[]"){
+                alert("Work Creadted");
+            }else {
+            alert("Error: try it again");
+    }
+
+  })}
 
 })
 

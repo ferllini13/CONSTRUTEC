@@ -32,8 +32,9 @@
                     <h3>Create a new Work</h3>
                 
                         <form autocomplete="off" id="myForm2" method="post" >
-                        <input type="text" placeholder=" Category name" required="required" ng-model="mante.cname" value="" class="input-user">
-                        <button type="button" class="btn btn-warning btn-block" ng-click="addWorks()"> Add Work</button>
+                        <input type="text" placeholder=" Work Location" required="required" ng-model="work.location" value="" class="input-user">
+                        <input type="text" placeholder=" Work Client" required="required" ng-model="work.client" value="" class="input-user">
+                        <button type="button" class="btn btn-warning btn-block" ng-click="addWork(work.location,work.client)"> Add Work</button>
                     </form>
                 
                 </div>
