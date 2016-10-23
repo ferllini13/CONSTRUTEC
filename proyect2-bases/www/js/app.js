@@ -374,13 +374,13 @@ app.controller('StagesCtrl', function($http, $scope, workData) {
     function addDelay() {
         $scope.items
         .sort(function(a, b) {
-      return a.c_location.toUpperCase().charCodeAt(0) > b.c_location.toUpperCase().charCodeAt(0) ? 1 : -1;
+      return a.description.toUpperCase().charCodeAt(0) > b.description.toUpperCase().charCodeAt(0) ? 1 : -1;
     })
     .forEach(function(item) {
       //Get the first letter of the last name, and if the last name changes
       //put the letter in the array
         
-      var itemCharCode = item.c_location.toUpperCase().charCodeAt(0);
+      var itemCharCode = item.description.toUpperCase().charCodeAt(0);
         
         
         
@@ -414,14 +414,14 @@ app.controller('StagesCtrl', function($http, $scope, workData) {
     //is one or more matching contact
     return itemsFinal.filter(function(item) {
       var itemDoesMatch = !$scope.search || item.isLetter ||
-        item.c_location.toLowerCase().indexOf($scope.search.toLowerCase()) > -1
+        item.description.toLowerCase().indexOf($scope.search.toLowerCase()) > -1
       //console.log(item.last_name.toString().charAt(0));
       
       //Mark this person's last name letter as 'has a match'
       if (!item.isLetter && itemDoesMatch) {
 
-        var letter = item.c_location.charAt(0).toUpperCase();
-        if ( item.c_location.charCodeAt(0) < 65 ){
+        var letter = item.description.charAt(0).toUpperCase();
+        if ( item.description.charCodeAt(0) < 65 ){
           letter = "#";
         }
         letterHasMatch[letter] = true;
