@@ -1,0 +1,168 @@
+create function add_comment(cid integer, sid integer, pcomment character varying) returns character varying as $message$
+	declare 
+		message character varying;
+	begin 
+		update construction_stage
+		set _comment = pcomment
+		where construction_stage.construcion_id = c_id and construction_stage.stage_id = sid;
+
+		return message;
+	end;
+	$message$ language plpgsql;
+	
+create function create_construction(pid integer, plocation character varying, pclient_id integer, ping_id integer) returns character varying as $message$
+	declare 
+		message character varying;
+	begin
+		insert into construction(id, c_location, client_id, ing_id)
+		values(pid, plocation, pclient_id, ping_id);
+		
+		return message; 
+	end;
+	$message$ language plpgsql;
+	
+create function create_stage(pid integer, pdescription character varying) returns character varying as $message$
+	declare 
+		message character varying;
+	begin 
+		insert into stage(id, description)
+		values(pid, pdescription);
+		
+		return message;
+	end;
+	$message$ language plpgsql;
+	
+create function create_user(pid integer, pname character varying, plastname character varying, pid_number character varying, p_password character varying, puser_name character varying, pcell_phone_number character varying, prol_id integer, pcode integer) returns character varying as $message$
+	declare 
+		message character varying;
+	begin
+		insert into general_user(id, _name, lastName, identity_number, pastword, username, cell_phone_number, code)
+		values (pid, pname, plastName, pid_number, p_password, puser_name, pcell_phone_number, pcode);
+
+		insert into user_rol(user_id, rol_id)
+		values(pid, prol_id);
+
+		message := '0';
+		return message;
+	end;
+	$message$ language plpgsql;	
+	
+create function insert_material_into_stage(pstage_id int, pmaterial_id character varying, pquantity int, pconstr_id int) returns character varying as $message$
+	declare 
+		message character varying;
+	begin 
+		insert into stage_materials(stage_id, material_id, c_id,quantity) 
+		values(pstage_id, pmaterial_id, pconstr_id,pquantity);
+	
+		return message;
+	end;
+	$message$ language plpgsql;
+	
+create function insert_material(pid character varying, pdescription character varying) returns character varying as $message$
+	 declare 
+		message character varying;
+	begin 
+		insert into material(id, m_name)
+		values(pid, pdescription);
+
+		return message;
+	end;
+	$message$ language plpgsql; 
+	
+CREATE FUNCTION insert_pedido_to_stage(pstage_id integer, pcons_id integer, pwish character varying)
+  RETURNS character varying AS $message$
+	declare 
+		message character varying;
+	begin
+		update construction_stage
+		set wish_id = pwish
+		where stage_id = pstage_id and construcion_id = pcons_id;
+
+		return messgae;
+	end;
+	$message$ LANGUAGE plpgsql;
+	
+create function insert_rol_to_user(puser_id int, prol_id int) returns character varying as $message$
+	begin 
+		insert into user_rol(user_id)
+		values(puser_id, prol_id);	
+
+		return message;
+	end;
+	$message$ language plpgsql;
+	
+create function insert_stage_into_construction(pconst_id int, pid int, pstart_day character varying, pfinish_day character varying) returns character varying as $message$
+	declare 
+		message character varying; 
+	begin
+		insert into construction_stage(construcion_id, stage_id, start_day, finish_day)
+		values(pconst_id, pid, pstart_day, pfinish_day);
+
+		return message;
+	end;
+	$message$ language plpgsql;
+	
+create function select_all_construction()
+	returns table (id int, c_location character varying, user_id int) as $$
+
+	begin 
+		return query select *
+			from construction;
+	end;
+	$$ language plpgsql; 
+	
+create function select_all_user()
+	returns table (id int, _name character varying, lastName character varying, identity_number character varying, cell_phone_number character varying, username character varying) as $$
+	begin 
+		return query select u.id, u._name, u.lastName, u.identity_number, u.cell_phone_number , u.username 
+				from general_user as u;
+	end;
+	$$ language plpgsql;
+	
+create function select_construction_by_material(pname character varying)
+	returns table (id int, c_location character varying) as $$
+	begin
+		return query select C.id, C.c_location
+			from stage_materials as SM inner join construction C on SM.c_id = C.id 
+			where SM.material_id in (select material.id from material where m_name = pname);
+	end;
+	$$ language plpgsql;
+	
+create function select_construction_by_user(pid int)
+	returns table (id int, c_location character varying, user_id int) as $$
+
+	begin 
+		return query select *
+			from construction
+			where user_id = pid;
+	end;
+	$$ language plpgsql; 
+	
+create function select_rol_by_user(pid int)
+	returns table ( type int) as $$
+	begin 
+		return query select rol._type
+				from user_rol inner join rol on user_rol.rol_id = rol.id
+				where user_rol.user_id = pid;
+	end;
+	$$ language plpgsql;
+	
+create function select_stage_by_construction(pid int)
+	returns table (description character varying,start_day character varying, finish_day character varying) as $$
+	declare
+	begin 
+		return query select S.description, CS.start_day, CS.finish_day
+			from construction_stage as CS inner join stage as S on CS.stage_id = S.id
+			where CS.construcion_id = pid;
+	end;
+	$$ language plpgsql;
+	
+create function select_user(pusername character varying, p_password character varying)
+	returns table (id int, _name character varying, lastName character varying, identity_number character varying, cell_phone_number character varying, username character varying) as $$
+	begin 
+		return query
+		select general_user.id, general_user._name, general_user.lastName, general_user.identity_number, general_user.cell_phone_number , general_user.username
+		from general_user
+		where general_user.username = pusername and general_user.pastword = p_password;
+	end;
+	$$ language plpgsql;
