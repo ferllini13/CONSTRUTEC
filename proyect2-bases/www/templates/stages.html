@@ -14,7 +14,7 @@
                 class="full-width white-background">
         </nav>
       <!--<button  ng-if="search.length"  class="button button-icon ion-android-close input-button"  ng-click="clearSearch()"></button>-->
-       <ul ng-init="update()">           
+       <ul ng-init="update()">      
            <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
                     ng-class="{'item-divider': item.isLetter}"
                     ng-repeat="item in getItems(search)" ng-click=addMaterials(item.id)>
