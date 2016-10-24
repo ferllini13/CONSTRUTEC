@@ -317,6 +317,7 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
   }
     
   $scope.addWork = function(place,client){
+     var form = document.getElementById("myForm2");  
     var peticion = "RegistrarObra?datos=";
     var newid = new Date().getTime().toString().slice(8,14);
     var request = "";
@@ -335,13 +336,15 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
                 alert("Error: server conection");
             }else {
                 alert("Work Creadted");
+                form.reset();
     }
   })}
 
 })
 
-app.controller('StagesCtrl', function($http, $scope, $location, workData, stageData) {
-
+app.controller('StagesCtrl', function($http, $scope, $location, workData, stageData,loginData) {
+    
+    var login = loginData.getLogin();
     $scope.addMaterials = function(id) {
         stageData.updateStage(id);
         $location.path('/addMaterials');
@@ -497,6 +500,7 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
     
     
     $scope.addStage=function(comment){
+        var form = document.getElementById("myForm2");
         var peticion = "RegistrarEtapa?datos=";
         var newid = new Date().getTime().toString().slice(8,14);
         var request = "";
@@ -515,7 +519,8 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
                     alert("Error: server conection");
                 }else {
                     alert("Stage Creadted");
-        }
+                    form.reset();
+                            }
   })
         
         
