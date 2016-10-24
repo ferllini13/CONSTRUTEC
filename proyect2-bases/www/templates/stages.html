@@ -18,8 +18,8 @@
            <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
                     ng-class="{'item-divider': item.isLetter}"
                     ng-repeat="item in getItems(search)" ng-click=addMaterials(item.id)>
-           {{item.letter || (item.description+ ' ('+ item.id+ ')' )}}
-              <img ng-if="!item.isLetter" src="img/shopping_cart_plus.png" class="shop-plus" ng-click="addStage(item._id)"></h4></li>
+           {{item.letter || (item.description)}}
+              </h4></li>
            </ul>
             <button type="button" class="btn btn-info btn-block" ng-click="update()"> Update Stages</button>
     </div>
@@ -27,8 +27,12 @@
 
         <div class="jumbotron">
         <h2 ALIGN="center"> Default stages</h2>
-                
-        <div class="form-group" style="color:#ffffff">
+        <form autocomplete="off" id="myForm3" method="post">
+
+                <input type="text" placeholder="Start Date (DD-MM-YY)" required="required" ng-model="stage.sdate1" value="" class="input-login" style="color:#000000">
+                <input type="text" placeholder="Finalization Date (DD-MM-YY)" required="required" ng-model="stage.fdate1" value="" class="input-login" style="color:#000000">
+            
+                <div class="form-group" style="color:#ffffff">
                     <label for="sel1" >Select a stage:</label>
                     <select  ng-model="type" required="required" class="form-control" id="sel1">
                          <option value="0">Trabajo Preliminar</option>
@@ -53,33 +57,27 @@
                     </select>
                 </div>
             
-            <button type="button" class="btn btn-warning btn-block" ng-click="addStage(stage.comment,stage.sdate,stage.fdate,type)"> Add Stage </button>
+                <button type="button" class="btn btn-warning btn-block" ng-click="addStage2(type,stage.sdate1,stage.fdate1)"> Add Stage </button>
+            </form>
+            
+            
             
             </div>
-
 
         <div class="jumbotron">
         <h2 ALIGN="center"> Create a new Stage</h2>
 
 
-        <form autocomplete="off" id="myFormWork" method="post">
+        <form autocomplete="off" id="myForm2" method="post">
             <input type="text" placeholder="General Description" required="required" ng-model="stage.comment" value="" class="input-login" style="color:#000000">
             <input type="text" placeholder="Start Date (DD-MM-YY)" required="required" ng-model="stage.sdate" value="" class="input-login" style="color:#000000">
             <input type="text" placeholder="Finalization Date (DD-MM-YY)" required="required" ng-model="stage.fdate" value="" class="input-login" style="color:#000000">
-              <button type="button" class="btn btn-warning btn-block" ng-click="addStage(stage.comment,stage.sdate,stage.fdate,"")"> Add Stage </button>
+              <button type="button" class="btn btn-warning btn-block" ng-click="addStage(stage.comment,stage.sdate,stage.fdate)"> Add Stage </button>
 
         </form>
             
             
             
-            
-        
-            
-    
     </div>
 
-    
-    
-
     </div>
-</div>

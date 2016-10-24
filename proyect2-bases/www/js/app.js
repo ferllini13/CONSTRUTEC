@@ -343,7 +343,8 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
 })
 
 app.controller('StagesCtrl', function($http, $scope, $location, workData, stageData,loginData) {
-    var form = document.getElementById("myForm2");
+    var form = document.getElementById("myForm3");
+    var form2 = document.getElementById("myForm2");
     var login = loginData.getLogin();
     $scope.addMaterials = function(id) {
         stageData.updateStage(id);
@@ -358,8 +359,6 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
     var new_stage_id = new Date().getTime().toString().slice(4,14);
     
     itemsFinal=$scope.itemsFinal=[];
-    
-    
     
     $scope.sell = function () {
         var peticion = "AsignacionMateriales?datos=";
@@ -502,12 +501,7 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
     $scope.addStage=function(comment,date1,date2,id){
         
         var peticion = "RegistrarEtapa?datos=";
-        var newid = "";
-        if (id==""){
-            newid = new Date().getTime().toString().slice(8,14);
-        }else {
-            newid=id;
-        }
+        var newid = new Date().getTime().toString().slice(8,14);
         var request = "";
         var id = login.id;
 
@@ -523,16 +517,17 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
                 if (result=="no se pudo establecer la conexión de la base de datos"){
                     alert("Error: server conection");
                 }else {
-                    
                     assingStage(newid,date1,date2);
 
                             }
   })
-    
-        
     }
+    $scope.addStage2=function(d,sdate,fdate){
+        assingStage(id,sdate,fdate)
+    };
     
     function assingStage(id,sdate,fdate){
+            console.log("djsbdnsbd");
             var peticion = "AsignacionEtapa?datos=";
             var request = "";
             var id = login.id;
@@ -548,9 +543,10 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
             if (result=="no se pudo establecer la conexión de la base de datos"){
                 alert("Error: server conection");
             }else {
-                
                 alert("Stage Creadted");
-                form.reset();}
+                form.reset();
+                form2.reset();
+            }
                   })
     
     
