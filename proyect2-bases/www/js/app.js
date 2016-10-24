@@ -200,7 +200,7 @@ app.controller('MaterialsCtrl', function($http, $scope) {
 });
 
 app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData) {
-    
+    $scope.user=false;
     $scope.stages = function(id) {
         workData.updateWork(id);
         $location.path('/stages');
@@ -208,6 +208,13 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
    var peticion = "ListarProyectos?datos=";
     var request = "";
     var login = loginData.getLogin();
+    
+    for ( i= 0; i< type.length; i++ )  {
+         if (type[i]==0){
+             $scope.user=true;
+         }
+    }
+    
     var id = login.id;
     console.log("id es: ", id);
     $scope.items = [];
@@ -343,12 +350,20 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
 })
 
 app.controller('StagesCtrl', function($http, $scope, $location, workData, stageData,loginData) {
+    $scope.user=false;
     var form = document.getElementById("myForm3");
     var form2 = document.getElementById("myForm2");
     var login = loginData.getLogin();
+        for ( i= 0; i< type.length; i++ )  {
+         if (type[i]==0){
+             $scope.user=true;
+         }
+    }
     $scope.addMaterials = function(id) {
+        if (user){
         stageData.updateStage(id);
         $location.path('/addMaterials');
+        }
     };
     
     var work = workData.getWork();
