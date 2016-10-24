@@ -317,8 +317,8 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
   }
     
   $scope.addWork = function(place,client){
-    var peticion = "RegistrarObra?datos=/";
-    var newid = new Date().getTime().toString();
+    var peticion = "RegistrarObra?datos=";
+    var newid = new Date().getTime().toString().slice(8,14);
     var request = "";
     var id = login.id;
                
@@ -330,10 +330,13 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
             console.log("Get Post status", response.data);
             var data = response.data;
             var result = data.substring(76, data.length - 9);
-            if (result =="[]"){
-                alert("Work Creadted");
+            if (result.length>4){
+                alert("Error: try it again");
+            }
+            else if (result=="no se pudo establecer la conexión de la base de datos"){
+                alert("Error: server conection");
             }else {
-            alert("Error: try it again");
+                alert("Work Creadted");
     }
   })}
 
@@ -667,7 +670,6 @@ $scope.verificar =  function(login){
                         else if (result=="no se pudo establecer la conexión de la base de datos"){
                             alert("database conection error");
                         }
-
                         else{
                             var result2 = angular.fromJson(result);
                             console.log("Get Post status 2", result2);
