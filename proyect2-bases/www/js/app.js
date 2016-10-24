@@ -208,6 +208,7 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
    var peticion = "ListarProyectos?datos=";
     var request = "";
     var login = loginData.getLogin();
+    var type=$scope.login.menutype;  
     
     for ( i= 0; i< type.length; i++ )  {
          if (type[i]==0){
@@ -354,6 +355,7 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
     var form = document.getElementById("myForm3");
     var form2 = document.getElementById("myForm2");
     var login = loginData.getLogin();
+    var type=$scope.login.menutype;  
         for ( i= 0; i< type.length; i++ )  {
          if (type[i]==0){
              $scope.user=true;
