@@ -1,0 +1,47 @@
+<div class="fond scroll">
+    
+    <div menu></div>
+    <div class="container">
+    <div class="jumbotron">
+        <h2> Stadistic</h2>
+        <h3 ALIGN="center"> Best Seller</h3>
+        <ul ng-init="updateBS()">           
+           <h4><li class="list-group-item ist-group-item-success"
+                    ng-repeat="itemBS in getItemsBS()">
+           {{ itemBS.productName }}
+           </h4></li>
+           </ul>
+
+    </div>
+    <div class="jumbotron">
+        <h3 ALIGN="center">Best Seller by Office and Movil App</h3>
+        <ul ng-init="updateBSO()">           
+           <h4><li class="list-group-item ist-group-item-success"
+                    ng-repeat="itemBSO in getItemsBSO()">
+           {{ itemBSO.productName }}
+            </h4></li>
+           </ul>
+        
+    </div>
+        
+        
+    <div class="jumbotron">
+        <h3 ALIGN="center">Seller Quantity by Office</h3> 
+        <ul ng-init="updateSPO()">           
+           <h4><li class="list-group-item ist-group-item-success" 
+                    ng-repeat="itemSPO in getItemsSPO()">
+           {{ itemSPO.productName}}
+            </h4></li>
+           </ul>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    </div>
+    
+    
+</div>

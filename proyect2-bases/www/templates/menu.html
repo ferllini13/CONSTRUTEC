@@ -1,0 +1,29 @@
+<div class=" navbar-wrapper navbar-fixed-top" style="fond-color: #00FFFF;">
+<div class="container">
+    <nav class="let" class="navbar navbar-default" style="background-color: #202020;">
+
+      <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapse" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"></button>
+            <a class="navbar-brand" href="#home">COSTRUTEC</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" >
+          <ul class="nav navbar-nav">
+            <li ng-if="engine"><a href="#/works">Works</a></li>
+            <li ng-if="client"><a href="#">view2</a></li>
+            <li ng-if="admi||engine"><a href="#">view3</a></li>
+            <li ng-if="admi"><a href="#/materials">Materials</a></li> 
+            <li ng-if="general"><a href="#/queries">Queries</a></li>
+            <li ng-if="engine"><a href="#/budget">Buget</a></li> 
+            <li><a href="#/about">About Us</a></li> 
+          
+            </ul>
+          <ul class="nav navbar-nav navbar-right">
+               <li><a>User : {{login.name}}::{{login.username}}</a></li>
+              <li class="out" ><a href="#">Log Out</a></li>
+          </ul>
+          </div>
+      </div>
+    </nav>
+</div>
+</div>

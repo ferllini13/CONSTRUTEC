@@ -1,0 +1,73 @@
+<div class="fond scroll">
+    
+    <div menu></div>
+        <div class="container" >
+            <div class="jumbotron">
+                <h2 ALIGN="center"> My Products</h2>
+                <nav>
+            <input type="search"
+             placeholder="Search for a product..."
+             ng-model="search"
+                ng-bind="search"
+               ng-focus="searchFocused = true"
+             ng-blur="searchFocused = false"
+             ng-change="scrollTop()"
+                class="full-width white-background">
+
+        </nav>   
+
+                
+            <ul ng-init="update()">           
+           <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
+                    ng-class="{'item-divider': item.isLetter}"
+                    ng-repeat="item in getItems(search)">
+            {{item.letter || (item._description+ ' ('+ item._id+ ')'+'  ; Department :' +  item._office + '  ;  Tax : ' +item. _nonTaxable+ '  ; In Stock: ' +item._amount )}}
+              <img ng-if="!item.isLetter" src="img/close-cross.png" class="shop-plus" ng-click="elimItem(item._id)"></h4></li>
+           </ul>
+            
+            
+            <button type="button" class="btn btn-primary btn-block btn btn-warning" ng-click="update()">Update</button>
+                
+
+</div>
+    <div class="jumbotron">
+                <div>
+                    <h3>Create a new Product</h3>
+                
+                    <form autocomplete="off" id="myForm" method="post" ng-submit="verificar(login)">
+                        <input  type="text" placeholder=" Name" required="required" ng-model="name" value=""class="input-user"> 
+                        <input  type="text" placeholder=" Quantity" required="required" ng-model="amoung" value=""class="input-user">
+                    </form>
+
+                        <form name="myForm2">
+                        <div class="form-group" style="color:#ffffff">
+                            <label for="sel1" style="color:#000000" >Select the branch office:</label>
+                            <select ng-model="office" required="required" class="form-control" id="sel1">
+                                <option value="San José">San Jose</option>
+                                <option value="Cartago">Cartago</option>
+                                <option value="Alajuela">Alajuela</option>
+                                <option value="Heredia">Heredia</option>
+                                <option value="Guanacaste">Guanacaste</option>
+                                <option value="Puntarenas">Puntarenas</option>
+                                <option value="Limón">Limon</option>
+                            </select>
+                            
+                        </div>
+                            <label>
+                                <input type="radio" ng-model="tax" value="1">
+                                Taxable
+                            </label><br/>
+                            <label>
+                                <input type="radio" ng-model="tax" value="0">
+                                Not Taxable
+                            </label><br/>
+                            
+                    </form>
+
+                    <button type="button" class="btn btn-warning btn-block" ng-click="addProducts(name,amoung,tax,office.toString())"> Add Category</button>
+
+                
+                </div>
+        
+        </div>
+</div>
