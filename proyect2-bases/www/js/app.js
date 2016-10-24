@@ -523,9 +523,7 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
 
                             }
   })
-        
-        
-        
+    
         
     }
     

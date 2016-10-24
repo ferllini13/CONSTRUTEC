@@ -61,8 +61,10 @@
 
 
         <form autocomplete="off" id="myFormWork" method="post">
-              <input type="text" placeholder="General Description" required="required" ng-model="stage.comment" value="" class="input-login" style="color:#000000">
-              <button type="button" class="btn btn-warning btn-block" ng-click="addStage(stage.comment)"> Add Stage </button>
+            <input type="text" placeholder="General Description" required="required" ng-model="stage.comment" value="" class="input-login" style="color:#000000">
+            <input type="text" placeholder="Start Date (DD-MM-YY)" required="required" ng-model="stage.sdate" value="" class="input-login" style="color:#000000">
+            <input type="text" placeholder="Finalization Date (DD-MM-YY)" required="required" ng-model="stage.fdate" value="" class="input-login" style="color:#000000">
+              <button type="button" class="btn btn-warning btn-block" ng-click="addStage(stage.comment,stage.sdate,stage.fdate)"> Add Stage </button>
 
         </form>
             
