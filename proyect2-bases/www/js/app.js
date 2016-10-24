@@ -330,11 +330,13 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
             console.log("Get Post status", response.data);
             var data = response.data;
             var result = data.substring(76, data.length - 9);
-            if (result.length>4){
-                alert("Error: try it again");
-            }
-            else if (result=="no se pudo establecer la conexión de la base de datos"){
+           
+            if (result=="no se pudo establecer la conexión de la base de datos"){
                 alert("Error: server conection");
+                
+            }else if (result.length>4){
+                alert("Error: try it again");
+            
             }else {
                 alert("Work Creadted");
     }
