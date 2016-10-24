@@ -499,7 +499,7 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
     
     
     
-    $scope.addStage=function(comment){
+    $scope.addStage=function(comment,date1,date2){
         
         var peticion = "RegistrarEtapa?datos=";
         var newid = new Date().getTime().toString().slice(8,14);
@@ -519,7 +519,7 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
                     alert("Error: server conection");
                 }else {
                     
-                    assingStage(newid);
+                    assingStage(newid,date1,date2);
 
                             }
   })
@@ -529,11 +529,11 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
         
     }
     
-    function assingStage(id){
+    function assingStage(id,sdate,fdate){
             var peticion = "AsignacionEtapa?datos=";
             var request = "";
             var id = login.id;
-            request = request.concat(ip, peticion,work.id,"/",id,"/","/");
+            request = request.concat(ip, peticion,work.id,"/",id,"/",sdate,"/",fdate);
             console.log("Request es:", request);
             $http.get(request)
                 .then(function (response) {
