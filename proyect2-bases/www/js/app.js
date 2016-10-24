@@ -1,6 +1,6 @@
 var app = angular.module('App', ['ngRoute']);
 
-var ip = "http://192.168.1.56:8080/Construtec.asmx/";
+var ip = "http://172.26.107.36:8080/Construtec.asmx/";
 
 function server_request($http, request) {
  $http.get(request)
@@ -366,11 +366,11 @@ app.controller('StagesCtrl', function($http, $scope, workData) {
     
     
     $scope.sell = function () {
-        var peticion = "AsignacionMateriales";
+        var peticion = "AsignacionMateriales?datos=";
         var request = "";
-          request = request.concat(ip, peticion, "?datos=", work_id, "/",stage_id);
+          request = request.concat(ip, peticion, work_id, "/",stage_id);
         for (var i in materials) {
-            request = request.concat("/", materials[i].id, "/", materials[i].amount, "/" materials[i].description)
+            request = request.concat("/", materials[i].id, "/", materials[i].amount, "/" ,materials[i].description)
         }
             console.log("Request es:", request);
 
@@ -394,9 +394,10 @@ app.controller('StagesCtrl', function($http, $scope, workData) {
                
     
     $scope.update = function() {
-        var peticion = "ListarEtapasPorProyecto";
+        var peticion = "ListarEtapasPorProyecto?datos=";
         var request = "";
-        request = request.concat(ip, peticion, "?datos=", id);
+        console.log("este es el id",work_id)
+        request = request.concat(ip, peticion,work_id);
         console.log("Request es:", request);
         itemsFinal=$scope.itemsFinal=[];
     $http.get(request)
@@ -406,6 +407,10 @@ app.controller('StagesCtrl', function($http, $scope, workData) {
             var data = response.data;
             var result = data.substring(76, data.length - 9);
             console.log("Get Post status", result);
+        
+            if (result=="no se pudo establecer la conexión de la base de datos"){
+             alert("error: click update");   
+            }else{
             var result2 = angular.fromJson(result);
             console.log("Get Post status 2", result2);
             for(var i in result2) {
@@ -413,7 +418,7 @@ app.controller('StagesCtrl', function($http, $scope, workData) {
             }
             var result3 = $scope.items;
             console.log("Result3 ", result3);
-        
+            }
 
  });
       };
@@ -468,8 +473,8 @@ app.controller('StagesCtrl', function($http, $scope, workData) {
       //Mark this person's last name letter as 'has a match'
       if (!item.isLetter && itemDoesMatch) {
 
-        var letter = item._description.charAt(0).toUpperCase();
-        if ( item._description.charCodeAt(0) < 65 ){
+        var letter = item.description.charAt(0).toUpperCase();
+        if ( item.description.charCodeAt(0) < 65 ){
           letter = "#";
         }
         letterHasMatch[letter] = true;
