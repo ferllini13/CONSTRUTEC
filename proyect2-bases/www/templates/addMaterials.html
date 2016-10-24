@@ -45,7 +45,7 @@
             ng-class="{'item-divider': item.isLetter}"
             ng-repeat="item in getItemsCart(search)">
    {{item.letter || (item._description+ ' ('+ item._id+ ')'+'  ; Department :' +  item._office + '  ;  Tax : ' +item. _nonTaxable+ '  ; In Stock: ' +item._amount )}}
-      <img ng-if="!item.isLetter" src="img/add.png" class="shop-plus" ng-click="addItemStage(item._id, item._description)"></h4></li> </h4></li>
+      <img ng-if="!item.isLetter" src="img/delete.png" class="shop-plus" ng-click="elimItemStage(item._id, item._description)"></h4></li> </h4></li>
    </ul>
 
 
