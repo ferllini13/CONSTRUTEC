@@ -499,10 +499,15 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
     
     
     
-    $scope.addStage=function(comment,date1,date2){
+    $scope.addStage=function(comment,date1,date2,id){
         
         var peticion = "RegistrarEtapa?datos=";
-        var newid = new Date().getTime().toString().slice(8,14);
+        var newid = "";
+        if (id==""){
+            newid = new Date().getTime().toString().slice(8,14);
+        }else {
+            newid=id;
+        }
         var request = "";
         var id = login.id;
 
