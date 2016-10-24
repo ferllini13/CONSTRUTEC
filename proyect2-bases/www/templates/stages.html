@@ -23,8 +23,37 @@
            </ul>
             <button type="button" class="btn btn-info btn-block" ng-click="update()"> Update Stages</button>
     </div>
+    
 
-
+        <div class="jumbotron">
+        <h2 ALIGN="center"> Default stages</h2>
+                
+        <div class="form-group" style="color:#ffffff">
+                    <label for="sel1" >Select a stage:</label>
+                    <select  ng-model="type" required="required" class="form-control" id="sel1">
+                         <option value="0">Trabajo Preliminar</option>
+                         <option value="1">Cimientos</option>
+                         <option value="2">Paredes</option>
+                        <option value="3">Concreto Reforzado</option>
+                        <option value="4">Techos</option>
+                        <option value="5">Cielos</option>
+                        <option value="6">Repello</option>
+                        <option value="7">Entrepisos</option>
+                        <option value="8">Pisos</option>
+                        <option value="9">Enchapes</option>
+                        <option value="10">Instalacion Pluvial</option>
+                        <option value="11">nstalacion Sanitaria</option>
+                        <option value="12">Instalacion electrica</option>
+                        <option value="13">Puertas</option>
+                        <option value="14">Cerrajeria</option>
+                        <option value="15">Ventanas</option>
+                        <option value="16">Closets</option>
+                        <option value="17">Mueble de pintura</option>
+                        <option value="18">Escaleras</option>
+                    </select>
+                </div>
+            
+            </div>
 
 
         <div class="jumbotron">
@@ -32,8 +61,8 @@
             
         
         <form autocomplete="off" id="myFormWork" method="post" ng-submit="verificar(work)">
-              <input type="text" placeholder="Work name" required="required" ng-model="work.name" value="" class="input-login" style="color:#ffffff">
-              <input type="text" placeholder="Cliente name" required="required" ng-model="work.client" value="" class="input-login" style="color:#ffffff">
+              <input type="text" placeholder="Work name" required="required" ng-model="work.name" value="" class="input-login" style="color:#000000">
+              <input type="text" placeholder="Cliente name" required="required" ng-model="work.client" value="" class="input-login" style="color:#000000">
               <button type="button" class="btn btn-warning btn-block" ng-click="addStage()"> Add Work</button>
         </form>
             
