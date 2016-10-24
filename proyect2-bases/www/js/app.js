@@ -343,7 +343,7 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
 })
 
 app.controller('StagesCtrl', function($http, $scope, $location, workData, stageData,loginData) {
-    
+    var form = document.getElementById("myForm2");
     var login = loginData.getLogin();
     $scope.addMaterials = function(id) {
         stageData.updateStage(id);
@@ -500,7 +500,7 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
     
     
     $scope.addStage=function(comment){
-        var form = document.getElementById("myForm2");
+        
         var peticion = "RegistrarEtapa?datos=";
         var newid = new Date().getTime().toString().slice(8,14);
         var request = "";
@@ -518,8 +518,9 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
                 if (result=="no se pudo establecer la conexión de la base de datos"){
                     alert("Error: server conection");
                 }else {
-                    alert("Stage Creadted");
-                    form.reset();
+                    
+                    assingStage(newid);
+
                             }
   })
         
@@ -527,6 +528,30 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
         
         
     }
+    
+    function assingStage(id){
+            var peticion = "AsignacionEtapa?datos=";
+            var request = "";
+            var id = login.id;
+            request = request.concat(ip, peticion,work.id,"/",id,"/","/");
+            console.log("Request es:", request);
+            $http.get(request)
+                .then(function (response) {
+                console.log('Get Post', response);
+                console.log("Get Post status", response.data);
+                var data = response.data;
+                var result = data.substring(76, data.length - 9);
+    
+            if (result=="no se pudo establecer la conexión de la base de datos"){
+                alert("Error: server conection");
+            }else {
+                
+                alert("Stage Creadted");
+                form.reset();}
+                  })
+    
+    
+};    
 })
 
 
