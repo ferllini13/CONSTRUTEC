@@ -333,10 +333,6 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
            
             if (result=="no se pudo establecer la conexión de la base de datos"){
                 alert("Error: server conection");
-                
-            }else if (result.length>4){
-                alert("Error: try it again");
-            
             }else {
                 alert("Work Creadted");
     }
@@ -497,6 +493,35 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
    
     letters.push(letter);
   }
+    
+    
+    
+    $scope.addStage=function(comment){
+        var peticion = "RegistrarEtapa?datos=";
+        var newid = new Date().getTime().toString().slice(8,14);
+        var request = "";
+        var id = login.id;
+
+        request = request.concat(ip, peticion,newid,"/",comment.replace(" ","%20"));
+        console.log("Request es:", request);
+        $http.get(request)
+                .then(function (response) {
+                console.log('Get Post', response);
+                console.log("Get Post status", response.data);
+                var data = response.data;
+                var result = data.substring(76, data.length - 9);
+
+                if (result=="no se pudo establecer la conexión de la base de datos"){
+                    alert("Error: server conection");
+                }else {
+                    alert("Stage Creadted");
+        }
+  })
+        
+        
+        
+        
+    }
 })
 
 
