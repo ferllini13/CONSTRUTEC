@@ -14,7 +14,7 @@
                 class="full-width white-background">
         </nav>
       <!--<button  ng-if="search.length"  class="button button-icon ion-android-close input-button"  ng-click="clearSearch()"></button>-->
-       <ul ng-init="update()">           
+       <ul ng-init="update()">      
            <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
                     ng-class="{'item-divider': item.isLetter}"
                     ng-repeat="item in getItems(search)" ng-click=addMaterials(item.id)>
@@ -58,12 +58,12 @@
 
         <div class="jumbotron">
         <h2 ALIGN="center"> Create a new Stage</h2>
-            
-        
-        <form autocomplete="off" id="myFormWork" method="post" ng-submit="verificar(work)">
-              <input type="text" placeholder="Work name" required="required" ng-model="work.name" value="" class="input-login" style="color:#000000">
-              <input type="text" placeholder="Cliente name" required="required" ng-model="work.client" value="" class="input-login" style="color:#000000">
-              <button type="button" class="btn btn-warning btn-block" ng-click="addStage()"> Add Work</button>
+
+
+        <form autocomplete="off" id="myFormWork" method="post">
+              <input type="text" placeholder="General Description" required="required" ng-model="stage.comment" value="" class="input-login" style="color:#000000">
+              <button type="button" class="btn btn-warning btn-block" ng-click="addStage(stage.comment)"> Add Stage </button>
+
         </form>
             
             

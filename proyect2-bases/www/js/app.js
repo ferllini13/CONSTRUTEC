@@ -317,6 +317,7 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
   }
     
   $scope.addWork = function(place,client){
+     var form = document.getElementById("myForm2");  
     var peticion = "RegistrarObra?datos=";
     var newid = new Date().getTime().toString().slice(8,14);
     var request = "";
@@ -330,20 +331,20 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
             console.log("Get Post status", response.data);
             var data = response.data;
             var result = data.substring(76, data.length - 9);
-            if (result.length>4){
-                alert("Error: try it again");
-            }
-            else if (result=="no se pudo establecer la conexión de la base de datos"){
+           
+            if (result=="no se pudo establecer la conexión de la base de datos"){
                 alert("Error: server conection");
             }else {
                 alert("Work Creadted");
+                form.reset();
     }
   })}
 
 })
 
-app.controller('StagesCtrl', function($http, $scope, $location, workData, stageData) {
-
+app.controller('StagesCtrl', function($http, $scope, $location, workData, stageData,loginData) {
+    
+    var login = loginData.getLogin();
     $scope.addMaterials = function(id) {
         stageData.updateStage(id);
         $location.path('/addMaterials');
@@ -495,6 +496,37 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
    
     letters.push(letter);
   }
+    
+    
+    
+    $scope.addStage=function(comment){
+        var form = document.getElementById("myForm2");
+        var peticion = "RegistrarEtapa?datos=";
+        var newid = new Date().getTime().toString().slice(8,14);
+        var request = "";
+        var id = login.id;
+
+        request = request.concat(ip, peticion,newid,"/",comment.replace(" ","%20"));
+        console.log("Request es:", request);
+        $http.get(request)
+                .then(function (response) {
+                console.log('Get Post', response);
+                console.log("Get Post status", response.data);
+                var data = response.data;
+                var result = data.substring(76, data.length - 9);
+
+                if (result=="no se pudo establecer la conexión de la base de datos"){
+                    alert("Error: server conection");
+                }else {
+                    alert("Stage Creadted");
+                    form.reset();
+                            }
+  })
+        
+        
+        
+        
+    }
 })
 
 
