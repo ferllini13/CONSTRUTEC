@@ -1,6 +1,6 @@
 var app = angular.module('App', ['ngRoute']);
 
-var ip = "http://172.26.107.36:8080/Construtec.asmx/";
+var ip = "http://192.168.0.30:8080/Construtec.asmx/";
 
 function server_request($http, request) {
  $http.get(request)
@@ -391,8 +391,6 @@ app.controller('StagesCtrl', function($http, $scope, workData) {
         addCart(id_mat, description_mat);
     };
     
-               
-    
     $scope.update = function() {
         var peticion = "ListarEtapasPorProyecto?datos=";
         var request = "";
@@ -515,6 +513,8 @@ app.controller('AboutCtrl', function() {
 })
 
 
+
+
 app.controller('loginController', function($scope,$http, loginData, $location) {
     console.log(ip);
     $scope.login = {username:'', password:'',name:'',id:'',code:'' ,menutype:'' }
@@ -522,7 +522,6 @@ app.controller('loginController', function($scope,$http, loginData, $location) {
     form.onsubmit = function(){
     form.reset();
   }
-
 
 $scope.verificar =  function(login){
                 var peticion = "ListarClienteEspecifico?datos=";
@@ -537,18 +536,17 @@ $scope.verificar =  function(login){
                         var data = response.data;
                         var result = data.substring(76, data.length - 9);
                         console.log("Get Post status", result);
-                    
-                        var result2 = angular.fromJson(result);
-
-                        console.log("Get Post status 2", result2);
     
-
-
                         if (result==="[]"){
                             alert("login erorr")
                             }
+                        else if (result=="no se pudo establecer la conexión de la base de datos"){
+                            alert("database conection error");
+                        }
 
                         else{
+                            var result2 = angular.fromJson(result);
+                            console.log("Get Post status 2", result2);
 
                             updateRoles(login,result2[0].id,result2[0]._name,result2[0].username, result,loginData, $location)
 
