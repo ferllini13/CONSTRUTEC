@@ -20,8 +20,40 @@
    {{item.letter || (item._description+ ' ('+ item._id+ ')'+'  ; Department :' +  item._office + '  ;  Tax : ' +item. _nonTaxable+ '  ; In Stock: ' +item._amount )}}
       <img ng-if="!item.isLetter" src="img/add.png" class="shop-plus" ng-click="addItemStage(item._id, item._description)"></h4></li> </h4></li>
    </ul>
+
+<h2 ALIGN="center"> Comment this stage</h2>
+
+
+        <form autocomplete="off" id="myForm2" method="post">
+            <input type="text" placeholder="Comment" required="required" ng-model="stage.comment" value="" class="input-login" style="color:#000000">
+        </form>
+
+
+<nav>
+    <input type="search"
+     placeholder="Search for a product..."
+     ng-model="search"
+     ng-bind="search"
+     ng-focus="searchFocused = true"
+     ng-blur="searchFocused = false"
+     ng-change="scrollTop()"
+     class="full-width white-background">
+</nav>
+<!--<button  ng-if="search.length"  class="button button-icon ion-android-close input-button"  ng-click="clearSearch()"></button>-->
+<ul ng-init="update()">           
+   <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
+            ng-class="{'item-divider': item.isLetter}"
+            ng-repeat="item in getItemsCart(search)">
+   {{item.letter || (item._description+ ' ('+ item._id+ ')'+'  ; Department :' +  item._office + '  ;  Tax : ' +item. _nonTaxable+ '  ; In Stock: ' +item._amount )}}
+      <img ng-if="!item.isLetter" src="img/add.png" class="shop-plus" ng-click="addItemStage(item._id, item._description)"></h4></li> </h4></li>
+   </ul>
+
+
     <button type="button" class="btn btn-info btn-block" ng-click="sell()"> Buy Materials</button>
 
 
     </div>
+
+
+
 </div>
