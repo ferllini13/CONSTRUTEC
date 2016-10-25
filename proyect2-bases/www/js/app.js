@@ -377,31 +377,10 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
     
     itemsFinal=$scope.itemsFinal=[];
     
-    $scope.sell = function () {
-        var peticion = "AsignacionMateriales?datos=";
-        var request = "";
-          request = request.concat(ip, peticion, work_id, "/",stage_id);
-        for (var i in materials) {
-            request = request.concat("/", materials[i].id, "/", materials[i].amount, "/" ,materials[i].description)
-        }
-            console.log("Request es:", request);
-
-    $http.get(request)
-            .then(function (response) {
-            console.log('Get Post', response);
-            console.log("Get Post status", response.data);
-            var data = response.data;
-            var result = data.substring(76, data.length - 9);
-            console.log("Get Post status", result);
-            var result2 = angular.fromJson(result);
-            console.log("Get Post status 2", result2);
-    })
-    };
     
     
-    $scope.addItemStage = function (id_mat, description_mat) {
-        addCart(id_mat, description_mat);
-    };
+    
+    
     
     $scope.update = function() {
         var peticion = "ListarEtapasPorProyecto?datos=";
@@ -589,6 +568,51 @@ app.controller('AddMaterialsCtrl', function(stageData, $scope, $http) {
                     materials = JSON.parse(JSON.stringify(materials));
                     
                 }
+    
+    function elimCart(id) {
+                    for (var i in materials) {
+                        if (materials[i].id === id) {                            
+                            materials[i].amount--;
+                            return;
+                        }
+                    }
+                        for (var i in materials) {
+                            if (materials[i].amount == 0) {
+                                itemsCart.slice(i, 1);
+                            }
+                        }
+                    
+    }
+    
+    $scope.sell = function () {
+        var peticion = "AsignacionMateriales?datos=";
+        var request = "";
+          request = request.concat(ip, peticion, work_id, "/",stage_id);
+        for (var i in materials) {
+            request = request.concat("/", materials[i].id, "/", materials[i].amount, "/" ,materials[i].description)
+        }
+            console.log("Request es:", request);
+
+    $http.get(request)
+            .then(function (response) {
+            console.log('Get Post', response);
+            console.log("Get Post status", response.data);
+            var data = response.data;
+            var result = data.substring(76, data.length - 9);
+            console.log("Get Post status", result);
+            var result2 = angular.fromJson(result);
+            console.log("Get Post status 2", result2);
+    })
+    };
+    
+    
+    $scope.addItemStage = function (id_mat, description_mat) {
+        addCart(id_mat, description_mat);
+    };
+
+    $scope.elimItemStage = function (id_mat) {
+        eli,Cart(id_mat);
+    };
     
     var peticion = "ConsutaMateriales";
     var request = "";
