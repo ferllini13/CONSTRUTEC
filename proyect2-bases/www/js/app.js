@@ -1,8 +1,6 @@
 var app = angular.module('App', ['ngRoute']);
 
-var ip = "http://192.168.0.30:8080/Construtec.asmx/";
-
-
+var ip = "http://172.19.13.1:8080/Construtec.asmx/";
 
 
 
@@ -354,6 +352,7 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
 })
 
 app.controller('StagesCtrl', function($http, $scope, $location, workData, stageData,loginData) {
+    $scope.bto=false;
     $scope.user=false;
     $scope.form = document.getElementById("myForm3");
     $scope.form2 = document.getElementById("myForm2");
@@ -384,7 +383,9 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
     
     
     
-    
+    $scope.updatebto = function(){
+        $scope.bto=!$scope.bto;
+    };
     
     $scope.update = function() {
         var peticion = "ListarEtapasPorProyecto?datos=";
@@ -556,6 +557,7 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
 
 app.controller('AddMaterialsCtrl', function(stageData, $scope, $http,loginData) {
     var materials = [];
+    $scope.user=false;
     
     var stage = stageData.getStage();
     $scope.name=stage.name;

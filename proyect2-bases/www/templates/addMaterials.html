@@ -21,14 +21,46 @@
       <img ng-if="!item.isLetter" src="img/add.png" class="shop-plus" ng-click="addItemStage(item._id, item._description)"></h4></li> </h4></li>
    </ul>
 
-<h2 ALIGN="center"> Comment this stage</h2>
 
+ <h2 ALIGN="center"> My Materials </h2>
+<nav>
+    <input type="search"
+     placeholder="Search for a product..."
+     ng-model="search"
+     ng-bind="search"
+     ng-focus="searchFocused = true"
+     ng-blur="searchFocused = false"
+     ng-change="scrollTop()"
+     class="full-width white-background">
+</nav>
+<ul ng-init="update()">           
+   <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
+            ng-class="{'item-divider': item.isLetter}"
+            ng-repeat="item in getItemsCart">
+   {{item.letter || (item.description +  ' Amount: ' +item.amount )}}
+      <img ng-if="!item.isLetter" src="img/delete.png" class="shop-plus" ng-click="elimItemStage(item.id)"></h4></li> </h4></li>
+   </ul>
+    
+    <h2 ALIGN="center"> Comment this stage</h2>
 
         <form autocomplete="off" id="myForm2" method="post">
             <input type="text" placeholder="Comment" required="required" ng-model="stage.comment" value="" class="input-login" style="color:#000000">
         </form>
+    <button type="button" class="btn btn-info btn-block" ng-click="sell()"> Asociate Materials</button>
+    </div>
 
- <h2 ALIGN="center"> My Meterials </h2>
+
+    <div class="jumbotron" ng-if="!user">
+        <h2 ALIGN="center"> Registed Materials of {{name}}</h2>
+
+        
+</div>  
+
+
+
+<div>
+    
+    <!-- esto es para cuando ya tiene registrada la vara-->
 <nav>
     <input type="search"
      placeholder="Search for a product..."
@@ -48,20 +80,9 @@
    </ul>
 
 
-    <button type="button" class="btn btn-info btn-block" ng-click="sell()"> Buy Materials</button>
 
+</div>
 
-    </div>
-
-    <div class="jumbotron" ng-if="!user">
-        <h2 ALIGN="center"> Registed Materials of {{name}}</h2>
-        
-        
-        
-        
-        
-        
-</div>    
 
 
 

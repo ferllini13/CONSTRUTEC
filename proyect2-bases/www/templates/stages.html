@@ -21,11 +21,11 @@
            {{item.letter || (item.description)}}
               </h4></li>
            </ul>
-            <button type="button" class="btn btn-info btn-block" ng-click="update()"> Update Stages</button>
+            <button ng-if="user" type="button" class="btn btn-info btn-block" ng-click="update()"> Update Stages</button>
     </div>
     
-
-        <div class="jumbotron" ng-if="user">
+        <button ng-if="user" type="button" class="btn btn-info btn-block" ng-click="updatebto()"> Add More Stages </button>    
+        <div class="jumbotron" ng-if="user&&bto">
         <h2 ALIGN="center"> Default stages</h2>
         <form autocomplete="off" id="myForm3" method="post">
 
@@ -64,7 +64,7 @@
             
             </div>
 
-        <div class="jumbotron" ng-if="user">
+        <div class="jumbotron" ng-if="user&&bto">
         <h2 ALIGN="center"> Create a new Stage</h2>
 
 
