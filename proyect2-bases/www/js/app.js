@@ -199,11 +199,10 @@ app.controller('MaterialsCtrl', function($http, $scope) {
     letters.push(letter);
   }
 
-    
-
 });
 
 app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData) {
+    $scope.form = document.getElementById("myForm2");
     $scope.user=false;
     $scope.stages = function(id,name) {
         workData.updateWork(id,name);
@@ -329,7 +328,6 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
   }
     
   $scope.addWork = function(place,client){
-     var form = document.getElementById("myForm2");  
     var peticion = "RegistrarObra?datos=";
     var newid = new Date().getTime().toString().slice(8,14);
     var request = "";
@@ -348,7 +346,7 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
                 alert("Error: server conection");
             }else {
                 alert("Work Creadted");
-                form.reset();
+                $scope.form.reset();
                 $scope.update();
     }
   })}
@@ -556,12 +554,20 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
 })
 
 
-app.controller('AddMaterialsCtrl', function(stageData, $scope, $http) {
+app.controller('AddMaterialsCtrl', function(stageData, $scope, $http,loginData) {
     var materials = [];
     
     var stage = stageData.getStage();
     $scope.name=stage.name;
     var stage_id = stage.id;
+    
+    var login = loginData.getLogin();
+    var type=login.menutype;  
+        for ( i= 0; i< type.length; i++ )  {
+         if (type[i]==0){
+             $scope.user=true;
+         }
+    }
     
     function addCart(id, description){   //[id, description, amount]
                     for (var i in materials) {
