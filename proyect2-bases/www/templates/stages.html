@@ -1,7 +1,7 @@
 <div menu></div>
 <div class="container" >
         <div class="jumbotron">
-        <h2 ALIGN="center"> Stages</h2>
+        <h2 ALIGN="center"> Stages of {{name}}</h2>
             
         <nav>
             <input type="search"
@@ -17,7 +17,7 @@
        <ul ng-init="update()">      
            <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
                     ng-class="{'item-divider': item.isLetter}"
-                    ng-repeat="item in getItems(search)" ng-click=addMaterials(item.id)>
+                    ng-repeat="item in getItems(search)" ng-click=addMaterials(item.id,item.description)>
            {{item.letter || (item.description)}}
               </h4></li>
            </ul>

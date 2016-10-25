@@ -17,7 +17,7 @@
        <ul ng-init="update()">           
            <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
                     ng-class="{'item-divider': item.isLetter}"
-                    ng-repeat="item in getItems(search)" ng-click=stages(item.id)>
+                    ng-repeat="item in getItems(search)" ng-click=stages(item.id,item.c_location)>
                    {{item.letter || (item.c_location+ ' ('+ item.id+ ')')}} 
               </h4></li>
            </ul>

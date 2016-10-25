@@ -205,8 +205,8 @@ app.controller('MaterialsCtrl', function($http, $scope) {
 
 app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData) {
     $scope.user=false;
-    $scope.stages = function(id) {
-        workData.updateWork(id);
+    $scope.stages = function(id,name) {
+        workData.updateWork(id,name);
         $location.path('/stages');
     };
    var peticion = "ListarProyectos?datos=";
@@ -349,6 +349,7 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
             }else {
                 alert("Work Creadted");
                 form.reset();
+                $scope.update();
     }
   })}
 
@@ -356,8 +357,8 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
 
 app.controller('StagesCtrl', function($http, $scope, $location, workData, stageData,loginData) {
     $scope.user=false;
-    var form = document.getElementById("myForm3");
-    var form2 = document.getElementById("myForm2");
+    $scope.form = document.getElementById("myForm3");
+    $scope.form2 = document.getElementById("myForm2");
     var login = loginData.getLogin();
     var type=login.menutype;  
         for ( i= 0; i< type.length; i++ )  {
@@ -365,15 +366,16 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
              $scope.user=true;
          }
     }
-    $scope.addMaterials = function(id) {
+    $scope.addMaterials = function(id,name) {
         if ($scope.user){
-        stageData.updateStage(id);
+        stageData.updateStage(id,name);
         $location.path('/addMaterials');
         }
     };
     
     var work = workData.getWork();
     var work_id = work.id;
+    $scope.name=work.name;
     $scope.items = [];
     var materials = [];
     
@@ -522,15 +524,13 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
                             }
   })
     }
-    $scope.addStage2=function(d,sdate,fdate){
-        assingStage(id,sdate,fdate)
+    $scope.addStage2=function(id,sdate,fdate){
+        assingStage(id,sdate,fdate);
     };
     
     function assingStage(id,sdate,fdate){
-            console.log("djsbdnsbd");
             var peticion = "AsignacionEtapa?datos=";
             var request = "";
-            var id = login.id;
             request = request.concat(ip, peticion,work.id,"/",id,"/",sdate,"/",fdate);
             console.log("Request es:", request);
             $http.get(request)
@@ -543,9 +543,11 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
             if (result=="no se pudo establecer la conexión de la base de datos"){
                 alert("Error: server conection");
             }else {
+                $scope.update();
                 alert("Stage Creadted");
-                form.reset();
-                form2.reset();
+                $scope.form.reset();
+                $scope.form2.reset();
+
             }
                   })
     
@@ -558,6 +560,7 @@ app.controller('AddMaterialsCtrl', function(stageData, $scope, $http) {
     var materials = [];
     
     var stage = stageData.getStage();
+    $scope.name=stage.name;
     var stage_id = stage.id;
     
     function addCart(id, description){   //[id, description, amount]
@@ -575,7 +578,7 @@ app.controller('AddMaterialsCtrl', function(stageData, $scope, $http) {
     
     function elimCart(id) {
         for (var i in materials) {
-                            if (materials[i].amount == 0) {
+                            if (materials[i].amount == 1) {
                                 materials.splice(i, 1);
                             }
                         }
@@ -1043,8 +1046,9 @@ work: {},
 getWork: function() {
  return this.work;
 },
-updateWork: function(id) {
+updateWork: function(id,name) {
    this.work.id=id;
+    this.work.name=name;
 }
 }
 })  
@@ -1055,8 +1059,9 @@ stage: {},
 getStage: function() {
  return this.stage;
 },
-updateStage: function(id) {
+updateStage: function(id,name) {
    this.stage.id=id;
+    this.stage.name=name;
 }
 }
 }) 
