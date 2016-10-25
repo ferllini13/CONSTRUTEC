@@ -17,7 +17,7 @@
    <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
             ng-class="{'item-divider': item.isLetter}"
             ng-repeat="item in getItems(search)">
-   {{item.letter || (item._description+ ' ('+ item._id+ ')'+'  ; Department :' +  item._office + '  ;  Tax : ' +item. _nonTaxable+ '  ; In Stock: ' +item._amount )}}
+   {{item.letter || (item._description + ';  Tax : ' +item._nonTaxable+ '  ; In Stock: ' +item._amount +'  ; Price :' +  item.price  )}}
       <img ng-if="!item.isLetter" src="img/add.png" class="shop-plus" ng-click="addItemStage(item._id, item._description)"></h4></li> </h4></li>
    </ul>
 
@@ -43,9 +43,9 @@
 <ul ng-init="update()">           
    <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
             ng-class="{'item-divider': item.isLetter}"
-            ng-repeat="item in getItemsCart(search)">
-   {{item.letter || (item.description +  'Amount: ' +item.amount )}}
-      <img ng-if="!item.isLetter" src="img/delete.png" class="shop-plus" ng-click="elimItemStage(item._id)"></h4></li> </h4></li>
+            ng-repeat="item in getItemsCart">
+   {{item.letter || (item.description +  ' Amount: ' +item.amount )}}
+      <img ng-if="!item.isLetter" src="img/delete.png" class="shop-plus" ng-click="elimItemStage(item.id)"></h4></li> </h4></li>
    </ul>
 
 

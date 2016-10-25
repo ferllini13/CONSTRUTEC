@@ -2,6 +2,10 @@ var app = angular.module('App', ['ngRoute']);
 
 var ip = "http://192.168.0.30:8080/Construtec.asmx/";
 
+
+
+
+
 function server_request($http, request) {
  $http.get(request)
             .then(function (response) {
@@ -570,17 +574,19 @@ app.controller('AddMaterialsCtrl', function(stageData, $scope, $http) {
                 }
     
     function elimCart(id) {
-                    for (var i in materials) {
-                        if (materials[i].id === id) {                            
-                            materials[i].amount--;
-                            return;
-                        }
-                    }
-                        for (var i in materials) {
+        for (var i in materials) {
                             if (materials[i].amount == 0) {
-                                itemsCart.slice(i, 1);
+                                materials.splice(i, 1);
                             }
                         }
+                    for (var i in materials) {
+                        if (materials[i].id === id) {
+                            if (materials[i].amount > 0) {
+                            materials[i].amount--;
+                            return;
+                            }
+                        }
+                    }                        
                     
     }
     
@@ -606,12 +612,14 @@ app.controller('AddMaterialsCtrl', function(stageData, $scope, $http) {
     };
     
     
-    $scope.addItemStage = function (id_mat, description_mat) {
+    $scope.addItemStage = function (id_mat, description_mat) {       
         addCart(id_mat, description_mat);
+        $scope.getItemsCart = materials;
     };
 
-    $scope.elimItemStage = function (id_mat) {
-        eli,Cart(id_mat);
+    $scope.elimItemStage = function (id_mat) {       
+        elimCart(id_mat);
+        $scope.getItemsCart = materials;
     };
     
     var peticion = "ConsutaMateriales";
@@ -676,7 +684,7 @@ app.controller('AddMaterialsCtrl', function(stageData, $scope, $http) {
     });
     }
     
-    
+    $scope.getItemsCart = materials;
     
     $scope.getItems = function(search) {
     $scope.items = itemsFinal;
