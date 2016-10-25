@@ -56,34 +56,4 @@
         
 </div>  
 
-
-
-<div>
-    
-    <!-- esto es para cuando ya tiene registrada la vara-->
-<nav>
-    <input type="search"
-     placeholder="Search for a product..."
-     ng-model="search"
-     ng-bind="search"
-     ng-focus="searchFocused = true"
-     ng-blur="searchFocused = false"
-     ng-change="scrollTop()"
-     class="full-width white-background">
-</nav>
-<ul ng-init="update()">           
-   <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
-            ng-class="{'item-divider': item.isLetter}"
-            ng-repeat="item in getItemsCart">
-   {{item.letter || (item.description +  ' Amount: ' +item.amount )}}
-      <img ng-if="!item.isLetter" src="img/delete.png" class="shop-plus" ng-click="elimItemStage(item.id)"></h4></li> </h4></li>
-   </ul>
-
-
-
-</div>
-
-
-
-
 </div>
