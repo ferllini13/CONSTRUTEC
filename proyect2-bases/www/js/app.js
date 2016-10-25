@@ -562,7 +562,7 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
 app.controller('AddMaterialsCtrl', function(stageData, $scope, $http,loginData,workData) {
     var materials = [];
     $scope.user=false;
-    
+    itemsFinal=$scope.itemsFinal=[];
     var stage = stageData.getStage();
     $scope.name=stage.name;
     var stage_id = stage.id;
@@ -644,11 +644,12 @@ app.controller('AddMaterialsCtrl', function(stageData, $scope, $http,loginData,w
     var request = "";
     
     $scope.items = [];
-    itemsFinal=$scope.itemsFinal=[];
+    
                
     request = request.concat(ip, peticion);
     console.log("Request es:", request);
     $scope.update = function() {
+        $scope.items = [];
         itemsFinal=$scope.itemsFinal=[];
     $http.get(request)
             .then(function (response) {
