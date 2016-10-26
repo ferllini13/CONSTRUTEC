@@ -227,7 +227,7 @@ app.controller('MaterialsCtrl', function($http, $scope) {
 
 
 app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData) {
-    $scope.form = document.getElementById("myForm2");
+    var form2 = document.getElementById("Form2");
     $scope.user=false;
     
     $scope.stages = function(id,name) {
@@ -276,7 +276,7 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
     
     
     $scope.print=function(id){
-      cosole.log("ESTE ES EL PUTO ID DE MIERDA  ",id);  
+      //cosole.log("ESTE ES EL PUTO ID DE MIERDA  ",id);  
     };
     
     
@@ -378,7 +378,7 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
                 alert("Error: server conection");
             }else {
                 alert("Work Creadted");
-                $scope.form.reset();
+                document.getElementById("Form2").reset();
                 $scope.update();
     }
   })}
@@ -416,8 +416,6 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
 app.controller('StagesCtrl', function($http, $scope, $location, workData, stageData,loginData) {
     $scope.bto=false;
     $scope.user=false;
-    $scope.form = document.getElementById("myForm3");
-    $scope.form2 = document.getElementById("myForm2");
     var work = workData.getWork();
     var work_id = work.id;
     var login = loginData.getLogin();
@@ -532,38 +530,15 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
             var result2 = angular.fromJson(result);
             console.log("Get Post status 2", result2);
             for(var i in result2) {
-            $scope.items.push(result2[i]);
+                $scope.items.push(result2[i]);
             }
-            var result3 = $scope.items;
-            console.log("Result3 ", result3);
+                var result3 = $scope.items;
+                console.log("Result3 ", result3);
             }
 
  });
         
-        /*var peticion2 = "PresupuestoTotal?datos=";
-        var request = "";
-        console.log("este es el id",work_id)
-        request = request.concat(ip, peticion2,work_id);
-        console.log("Request supra-experimental es:", request);
-    $http.get(request)
-            .then(function (response) {
-            console.log('Get Post', response);
-            console.log("Get Post status", response.data);
-            var data = response.data;
-            var result = data.substring(76, data.length - 9);
-            console.log("Get Post status", result);
-        
-            if (result=="no se pudo establecer la conexión de la base de datos"){
-             alert("error: click update");   
-            }else{
-            var result2 = angular.fromJson(result);
-            console.log("Get Post status 2", result2);
-            $scope.precioFinal = result2[0].total;
-            }
-
- });*/
-       
-        
+   
         
         for(i = 0; i < $scope.items.length; i++) {
             evitaHilos(i);
@@ -701,8 +676,8 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
             }else {
                 $scope.update();
                 alert("Stage Creadted");
-                $scope.form.reset();
-                $scope.form2.reset();
+                document.getElementById("myForm3").reset();
+                document.getElementById("myForm2").reset();
 
             }
                   })
@@ -1277,7 +1252,6 @@ app.controller('MaterialsStageCtrl', function(stageData, $scope, $http,loginData
       itemsFinal.push(item);
     });
     }
-    
     $scope.getItemsCart = materials;
     
     $scope.getItems = function(search) {
