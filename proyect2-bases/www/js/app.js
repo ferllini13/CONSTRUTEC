@@ -1,6 +1,6 @@
 var app = angular.module('App', ['ngRoute']);
 
-var ip = "http://172.26.100.1:8080/Construtec.asmx/";// ip necesaria para acceso al webservice:: cambiar ip segun host
+var ip = "http://172.26.100.221:8080/Construtec.asmx/";// ip necesaria para acceso al webservice:: cambiar ip segun host
 
 
 

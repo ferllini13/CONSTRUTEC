@@ -1,8 +1,7 @@
-<ion-view view-title="CTEC Register">
+<ion-view view-title="Materials of {{name}}" class="backgroundLogin">
     
-    <ion-content class="backgroundLogin">
+    <ion-content >
 
-        <h1 ALIGN="center" style="color:#ffffff">Materials of {{name}}</h1>
         <div class="jumbotron">
             
         <nav>
@@ -20,7 +19,7 @@
            <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
                     ng-class="{'item-divider': item.isLetter}"
                     ng-repeat="item in getItems(search)">
-           {{item.letter || (item.description+ ';  Added: ' +item.amount )}}
+           {{item.letter || (item.description+ ';  Added: ' +item.quantity )}}
               </h4></li>
            </ul>
             <button type="button" class="btn btn-info btn-block" ng-click="update()"> Update Materials</button>

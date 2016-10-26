@@ -1,6 +1,6 @@
-<ion-view view-title="Stages">
+<ion-view view-title="Stages" class="backgroundLogin">
     
-    <ion-content class="backgroundLogin">
+    <ion-content >
 
         <h1 ALIGN="center" style="color:#ffffff">Stages of {{name}}</h1>
         <div class="jumbotron">
@@ -20,10 +20,10 @@
            <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
                     ng-class="{'item-divider': item.isLetter}"
                     ng-repeat="item in getItems(search)" ng-click=addMaterials(item.id,item.description)>
-           {{item.letter || (item.description +' ( ' + ' Precio: ' + item.price + ')' )}}
+           {{item.letter || (item.description +' ( ' + ' Precio: $' + item.price + ')' )}}
               </h4></li>
             <h4><li class="list-group-item ist-group-item-success">
-           {{'Total Price: ' + precioFinal}}
+           {{'Work Total Price: $' + precioFinal}}
               </h4></li>
            </ul>
         
