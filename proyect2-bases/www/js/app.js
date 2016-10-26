@@ -429,13 +429,11 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
     }
     $scope.addMaterials = function(id,name) {
                 
-        if ($scope.user){
-
             var peticion = "ListarMaterialesEtapa?datos=";
             var request = "";
     
 
-            request = request.concat(ip, peticion,"/",id,"/",work_id);
+            request = request.concat(ip, peticion,id,"/",work_id);
             console.log("Request es:", request);
             $http.get(request)
                     .then(function (response) {
@@ -444,22 +442,20 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
                     var data = response.data;
                     var result = data.substring(76, data.length - 9);
                     console.log("Get Post status", result);
-                    var result2 = angular.fromJson(result);
-                    console.log("Get Post status 2", result2);
                 
                     if (result=="[]"){
                         stageData.updateStage(id,name);
                         $location.path('/addMaterials');
-                    }else {
+                    }
+                    else if (result=="no se pudo establecer la conexión de la base de datos"){
+                        alert("Error: accesto data base; try agian")
+                    }
+                    else {
                         stageData.updateStage(id,name);
-                    $location.path('/materialsStage');
+                        $location.path('/materialsStage');
                 
                     }
              });
-            }else {
-                stageData.updateStage(id,name);
-                $location.path('/materialsStage'); 
-                }
                 
         
     };
@@ -1158,7 +1154,7 @@ app.controller('MaterialsStageCtrl', function(stageData, $scope, $http,loginData
     $scope.items = [];
     itemsFinal=$scope.itemsFinal=[];
                
-    request = request.concat(ip, peticion,"/",stage_id,"/",work_id);
+    request = request.concat(ip, peticion,stage_id,"/",work_id);
     console.log("Request es:", request);
     $scope.update = function() {
         itemsFinal=$scope.itemsFinal=[];
