@@ -426,11 +426,12 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
          }
     }
     $scope.addMaterials = function(id,name) {
-                
+            
+        if ($scope.user){       
             var peticion = "ListarMaterialesEtapa?datos=";
             var request = "";
     
-
+            
             request = request.concat(ip, peticion,id,"/",work_id);
             console.log("Request es:", request);
             $http.get(request)
@@ -440,7 +441,7 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
                     var data = response.data;
                     var result = data.substring(76, data.length - 9);
                     console.log("Get Post status", result);
-                
+
                     if (result=="[]"){
                         stageData.updateStage(id,name);
                         $location.path('/addMaterials');
@@ -454,7 +455,11 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
                 
                     }
              });
+        }else{
+            stageData.updateStage(id,name);
+            $location.path('/materialsStage');
                 
+        }
         
     };
     
@@ -752,8 +757,12 @@ app.controller('AddMaterialsCtrl', function(stageData, $scope, $http,loginData,w
             var data = response.data;
             var result = data.substring(76, data.length - 9);
             console.log("Get Post status", result);
-            var result2 = angular.fromJson(result);
-            console.log("Get Post status 2", result2);
+            if (result=="[]"){
+                alert("Asignation Acomplish");
+            }
+            else{
+                alert("Stage already have material");
+            }
     })
     };
     

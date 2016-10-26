@@ -18,7 +18,7 @@
            <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
                     ng-class="{'item-divider': item.isLetter}"
                     ng-repeat="item in getItems(search)">
-           {{item.letter || (item.description+ ';  Added: ' +item.amount )}}
+           {{item.letter || (item.description+ ';  Added: ' +item.quantity )}}
               </h4></li>
            </ul>
             <button type="button" class="btn btn-info btn-block" ng-click="update()"> Update Materials</button>
