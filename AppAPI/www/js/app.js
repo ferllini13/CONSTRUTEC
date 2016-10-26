@@ -76,15 +76,10 @@ app.config(function($stateProvider, $urlRouterProvider){
             
             })
         // para el view de las etapas
-        .state('menu.stages',{
+        .state('stages',{
             url: '/stages',
-        views: {
-                    'menuContent': {
-                        controller: 'StagesCtrl',
-                        templateUrl:'templates/stages.html'
-                    }
-                }
-            
+            controller: 'StagesCtrl',
+            templateUrl:'templates/stages.html'      
             })
     
         //para el view de las queries del usuario general
@@ -100,27 +95,19 @@ app.config(function($stateProvider, $urlRouterProvider){
             })
     
         //para el view que agrega materiales a una etapa
-        .state('menu.addMaterials',{
+        .state('addMaterials',{
             url: '/addMaterials',
-        views: {
-                    'menuContent': {
-                        controller: 'AddMaterialsCtrl',
-                        templateUrl:'templates/addMaterials.html'
-                    }
-                }
+            controller: 'AddMaterialsCtrl',
+          templateUrl:'templates/addMaterials.html'               
             
             })
     
         //para el view que muestra los materiales en una etapa
-        .state('menu.materialsStage',{
+        .state('materialsStage',{
             url: '/materialsStage',
-        views: {
-                    'menuContent': {
-                        controller: 'MaterialsStageCtrl',
-                        templateUrl:'templates/materialsStage.html'
-                    }
-                }
-            
+            controller: 'MaterialsStageCtrl',
+            templateUrl:'templates/materialsStage.html'
+
             })
         // para iniciar directamente en el login
          $urlRouterProvider.otherwise('/login');

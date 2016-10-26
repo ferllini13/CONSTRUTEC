@@ -29,18 +29,30 @@
                     <ion-item>
                         <h2>User : {{login.name}}:@{{login.username}}</h2>
                     </ion-item>
-                    <ion-item  menu-close class="item item-icon-left" href="#/menu/home"> 
-                        <i class="icon ion-settings dark-blue-color"> </i>
-                        <li ng-if="engine||client"><a href="#/menu/works">Works</a></li>
+                    <ion-item  menu-close class="item item-icon-left" href="#/menu/works" ng-if="engine||client"> 
+                        <i class="icon ion-ios-list dark-blue-color"> </i>
+                        Works
                     </ion-item>
+                    
+                    <ion-item  menu-close class="item item-icon-left" href="#/menu/materials" ng-if="admi"> 
+                        <i class="icon ion-settings dark-blue-color"> </i>
+                        Materials
+                    </ion-item>
+                    
+                    <ion-item  menu-close class="item item-icon-left" href="#/menu/queries" ng-if="general"> 
+                        <i class="icon ion-ios-copy dark-blue-color"> </i>
+                        Queries
+                    
+                    <ion-item menu-close class="item item-icon-left" href="#/menu/about" >
+                        <i class="icon ion-information-circled dark-blue-color"> </i>
+                        About
+                    </ion-item>
+                    
                     <ion-item class="element" menu-close href="#/cart">
                         <img class="cart" src="img/shopping_cart.png">
                         <h2 class=cart-name>Cart</h2>
                     </ion-item>
-                    <ion-item menu-close class="item item-icon-left" href="#/about" >
-                        <i class="icon ion-information-circled dark-blue-color"> </i>
-                        About
-                    </ion-item>
+                    
                     <button class="button button-block icon item-icon-left ion-power dark-blue" ng-click="logOut()">        Log out</button>
 
                 </ion-list>
