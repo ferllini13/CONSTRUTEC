@@ -229,6 +229,7 @@ app.controller('MaterialsCtrl', function($http, $scope) {
 app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData) {
     $scope.form = document.getElementById("myForm2");
     $scope.user=false;
+    
     $scope.stages = function(id,name) {
         workData.updateWork(id,name);
         $location.path('/stages');
@@ -247,6 +248,7 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
     var id = login.id;
     console.log("id es: ", id);
     $scope.items = [];
+    $scope.items2 = [];
     itemsFinal=$scope.itemsFinal=[];
                
     request = request.concat(ip, peticion, id);
@@ -263,7 +265,7 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
             var result2 = angular.fromJson(result);
             console.log("Get Post status 2", result2);
             for(var i in result2) {
-            $scope.items.push(result2[i]);
+                $scope.items.push(result2[i]);
             }
             var result3 = $scope.items;
             console.log("Result3 ", result3);
@@ -271,6 +273,11 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
 
  });
       };
+    
+    
+    $scope.print=function(id){
+      cosole.log("ESTE ES EL PUTO ID DE MIERDA  ",id);  
+    };
     
     
     function addDelay() {
@@ -375,6 +382,34 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
                 $scope.update();
     }
   })}
+  
+  
+  $scope.getUsers=function(){
+    var peticion2 = "ListarTodosClientes";
+    var request2 = "";               
+    $scope.items2=[];  
+    request2 = request2.concat(ip, peticion2);
+    console.log("Request es:", request2);
+    $http.get(request)
+            .then(function (response) {
+            console.log('Get Post', response);
+            console.log("Get Post status", response.data);
+            var data = response.data;
+            var result = data.substring(76, data.length - 9);
+            console.log("Get Post status", result);
+            var result2 = angular.fromJson(result);
+            console.log("Get Post status 2", result2);
+            for(var i in result2) {
+                $scope.items2.push(result2[i]);
+            }
+            var result3 = $scope.items;
+            console.log("Result3 ", result3);
+        
+
+ });  
+      
+  };
+  
 
 })
 
