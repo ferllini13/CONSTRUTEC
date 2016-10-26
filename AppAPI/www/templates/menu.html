@@ -42,13 +42,16 @@
                     <ion-item  menu-close class="item item-icon-left" href="#/menu/queries" ng-if="general"> 
                         <i class="icon ion-ios-copy dark-blue-color"> </i>
                         Queries
-                    
+                    </ion-item>
                     <ion-item menu-close class="item item-icon-left" href="#/menu/about" >
                         <i class="icon ion-information-circled dark-blue-color"> </i>
                         About
                     </ion-item>
+                        
+                    <ion-item href="#/login" >
+                        <button class="button button-block icon item-icon-left ion-power dark-blue" ng-click="logOut()">        Log out</button>
+                    </ion-item>
                     
-                    <button class="button button-block icon item-icon-left ion-power dark-blue" ng-click="logOut()">        Log out</button>
 
                 </ion-list>
                 </ion-content>

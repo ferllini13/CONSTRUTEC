@@ -1146,7 +1146,7 @@ function updateRoles(login,id,name, username, result,loginData){
 
             else if (rol[0]===2){    
             loginData.updateLogin(login,id,name,username,rol);
-                $state.go('menu.materials'); 
+                $state.go('menu.queries'); 
             }
 
             else if (rol[0]===3){    

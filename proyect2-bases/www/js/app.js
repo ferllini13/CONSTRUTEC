@@ -1082,7 +1082,7 @@ function updateRoles(login,id,name, username, result,loginData,$location){
 
             else if (rol[0]===2){    
             loginData.updateLogin(login,id,name,username,rol);
-            $location.path('/materials');
+            $location.path('/queries');
             }
 
             else if (rol[0]===3){    
