@@ -468,7 +468,42 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
     var new_stage_id = new Date().getTime().toString().slice(4,14);
     
     itemsFinal=$scope.itemsFinal=[];
+    $scope.precioFinal = 0;
     
+    function evitaHilos(i) {
+        var peticion = "PresupuestoEtapa?datos=";
+        var request = "";
+        request = request.concat(ip, peticion,$scope.items[i].id,",",work_id);
+        console.log("Id experimental es:", $scope.items[i].id);
+            $http.get(request)
+            .then(function (response) {
+            console.log('Get Post', response);
+            console.log("Get Post status", response.data);
+            var data = response.data;
+            var result = data.substring(76, data.length - 9);
+            console.log("Get Post status", result);
+        
+            if (result=="no se pudo establecer la conexión de la base de datos"){
+             alert("error: click update");   
+            }else{
+            var result2 = angular.fromJson(result);
+            console.log("Get Post status 2", result2);
+            console.log("Precio experimental es: ", result2[0].total);
+            
+            if (result2[0].total == null) {
+                $scope.items[i].price = 0;
+            }
+                else {
+                    
+                                
+                    $scope.items[i]['price'] = result2[0].total;
+                }
+            var result3 = $scope.items;
+            console.log("Result experimental ", result3);
+            $scope.precioFinal = $scope.precioFinal + $scope.items[i].price;
+            }
+ });
+    }
     
     
     
@@ -504,6 +539,38 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
             }
 
  });
+        
+        /*var peticion2 = "PresupuestoTotal?datos=";
+        var request = "";
+        console.log("este es el id",work_id)
+        request = request.concat(ip, peticion2,work_id);
+        console.log("Request supra-experimental es:", request);
+    $http.get(request)
+            .then(function (response) {
+            console.log('Get Post', response);
+            console.log("Get Post status", response.data);
+            var data = response.data;
+            var result = data.substring(76, data.length - 9);
+            console.log("Get Post status", result);
+        
+            if (result=="no se pudo establecer la conexión de la base de datos"){
+             alert("error: click update");   
+            }else{
+            var result2 = angular.fromJson(result);
+            console.log("Get Post status 2", result2);
+            $scope.precioFinal = result2[0].total;
+            }
+
+ });*/
+       
+        
+        
+        for(i = 0; i < $scope.items.length; i++) {
+            evitaHilos(i);
+        
+        }
+        
+        
       };
     
     
@@ -541,7 +608,8 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
     
     
     $scope.getItems = function(search) {
-    $scope.items = itemsFinal;
+        
+     $scope.items = itemsFinal;
     $scope.search = search;
     letterHasMatch = {};
         
