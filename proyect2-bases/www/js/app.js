@@ -1,6 +1,6 @@
 var app = angular.module('App', ['ngRoute']);
 
-var ip = "http://172.19.13.1:8080/Construtec.asmx/";
+var ip = "http://172.19.13.1:8080/Construtec.asmx/";// ip necesaria para acceso al webservice:: cambiar ip segun host
 
 
 
@@ -17,82 +17,102 @@ function server_request($http, request) {
  });       
 }
 
+
+
+//se definen las views, las rutas de cada una y el controlador correspondiente
 app.config(['$routeProvider', function($routeProvider, $urlRouterProvider) {
 
     $routeProvider
-        .when('/login', {
-            templateUrl: 'templates/login.html',
-            controller: 'loginController'
+        .when('/login', { //para la vista de login
+            templateUrl: 'templates/login.html',//url con la que se accesa a login
+            controller: 'loginController'// controlador de la vista del login
+        
         })
+    
+        // se definen igual que para login las demas views
         .when('/signUp', {
             controller: 'SignUpCtrl',
             templateUrl:'templates/signUp.html'
         })
+        //par al view de about
         .when('/about',{
             controller: 'AboutCtrl',
             templateUrl:'templates/about.html'
             })
+        //para el view de materiales   
         .when('/materials',{
             controller: 'MaterialsCtrl',
             templateUrl:'templates/materials.html'
             })
+    
+        // para el view de las obras
         .when('/works',{
             controller: 'WorksCtrl',
             templateUrl:'templates/works.html'
             })
-
+        // para el view de las etapas
         .when('/stages',{
             controller: 'StagesCtrl',
             templateUrl:'templates/stages.html'
             })
+    
+        //para el view de las queries del usuario general
         .when('/queries',{
             controller: 'QueriesCtrl',
             templateUrl:'templates/queries.html'
             })
+    
+        //para el view que agrega materiales a una etapa
         .when('/addMaterials',{
             controller: 'AddMaterialsCtrl',
             templateUrl:'templates/addMaterials.html'
             })
+    
+        //para el view que muestra los materiales en una etapa
         .when('/materialsStage',{
             controller: 'MaterialsStageCtrl',
             templateUrl:'templates/materialsStage.html'
             })
+        // para iniciar directamente en el login
          .otherwise({
             redirectTo: '/login'
         });
 
 }])
 
+// se define el controlador para el menu
 app.controller('MenuCtrl', function($scope,loginData) {
-$scope.login = loginData.getLogin();
+$scope.login = loginData.getLogin();// recupera los datos del login
 console.log($scope.login.username);    
-$scope.engine=false;
-$scope.client=false;
-$scope.general=false;
-$scope.admi=false;
-$scope.ifMenu=true;   
+//se definen las variables de control para los permisos
+$scope.engine=false;// para ingenieros
+$scope.client=false;// para clientes
+$scope.general=false;//para el usuario general
+$scope.admi=false;// para el administrador 
 
-var type=$scope.login.menutype;    
+var type=$scope.login.menutype;
+// se recorre un arrary con los roles del usuario actual para poder identificar variables de seguridad    
 for ( i= 0; i< type.length; i++ )  {
- if (type[i]==0){
+ if (type[i]==0){// si es un ingeniero
      $scope.engine=true;
  }
-  else if (type[i]==1){
+  else if (type[i]==1){//si es un cliente
      $scope.client=true;
  }
-  else if (type[i]==2){
+  else if (type[i]==2){//si es un usuario general
      $scope.general=true;
  }
- else if (type[i]==3){
+ else if (type[i]==3){// si es un administrador
      $scope.admi=true;
  }
 }
     
 })
 
+// se define el controlador que permite ver todos los materiales existentes
 app.controller('MaterialsCtrl', function($http, $scope) {
-    var peticion = "ConsutaMateriales";
-    var request = "";
+    var peticion = "ConsutaMateriales";// peticion necesaria para pedir todos los materiales en epatec del web service 
+    var request = "";// string que concatena el request completo
     
     $scope.items = [];
     itemsFinal=$scope.itemsFinal=[];
@@ -101,28 +121,30 @@ app.controller('MaterialsCtrl', function($http, $scope) {
     console.log("Request es:", request);
     $scope.update = function() {
         itemsFinal=$scope.itemsFinal=[];
-    $http.get(request)
-            .then(function (response) {
+    $http.get(request)// se llama al web service para acceder a lo solicitado en el request
+    
+            .then(function (response) {// se capta la respuesta del servidor
             console.log('Get Post', response);
             console.log("Get Post status", response.data);
-            var data = response.data;
-            var result = data.substring(76, data.length - 9);
+            var data = response.data;// se toma la respuesta
+            var result = data.substring(76, data.length - 9);// se castea a un string con solo el json
             console.log("Get Post status", result);
-            var result2 = angular.fromJson(result);
+            var result2 = angular.fromJson(result);// se parsea a json
             console.log("Get Post status 2", result2);
-            for(var i in result2) {
-            $scope.items.push(result2[i]);
+            
+            for(var i in result2) {// se agregan los items parseados del json a una lista para poder utilizarlos
+            $scope.items.push(result2[i]);// push a la lista
             }
-            var result3 = $scope.items;
+            var result3 = $scope.items;// se asigna la lista completa
             console.log("Result3 ", result3);
 
  });
         
-        addDelay();
+        addDelay();// delay para evitar problemas secuenciales
       };
     
     
-    function addDelay() {
+    function addDelay() {// funcion  que agrega un delay para poder mantener la continuidad logica del programa
         $scope.items
         .sort(function(a, b) {
       return a._description.toUpperCase().charCodeAt(0) > b._description.toUpperCase().charCodeAt(0) ? 1 : -1;
@@ -152,8 +174,6 @@ app.controller('MaterialsCtrl', function($http, $scope) {
       itemsFinal.push(item);
     });
     }
-    
-    
     
     $scope.getItems = function(search) {
     $scope.items = itemsFinal;
@@ -203,6 +223,9 @@ app.controller('MaterialsCtrl', function($http, $scope) {
 
 });
 
+
+
+
 app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData) {
     $scope.form = document.getElementById("myForm2");
     $scope.user=false;
@@ -210,7 +233,7 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
         workData.updateWork(id,name);
         $location.path('/stages');
     };
-   var peticion = "ListarProyectos?datos=";
+    var peticion = "ListarProyectos?datos=";
     var request = "";
     var login = loginData.getLogin();
     var type=login.menutype;  
@@ -360,6 +383,8 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
     $scope.user=false;
     $scope.form = document.getElementById("myForm3");
     $scope.form2 = document.getElementById("myForm2");
+    var work = workData.getWork();
+    var work_id = work.id;
     var login = loginData.getLogin();
     var type=login.menutype;  
         for ( i= 0; i< type.length; i++ )  {
@@ -368,14 +393,42 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
          }
     }
     $scope.addMaterials = function(id,name) {
+                
         if ($scope.user){
+
+            var peticion = "ListarMaterialesEtapa?datos=";
+            var request = "";
+    
+
+            request = request.concat(ip, peticion,"/",id,"/",work_id);
+            console.log("Request es:", request);
+            $http.get(request)
+                    .then(function (response) {
+                    console.log('Get Post', response);
+                    console.log("Get Post status", response.data);
+                    var data = response.data;
+                    var result = data.substring(76, data.length - 9);
+                    console.log("Get Post status", result);
+                    var result2 = angular.fromJson(result);
+                    console.log("Get Post status 2", result2);
+                 });
+            if (result=="[]"){
+                stageData.updateStage(id,name);
+                $location.path('/addMaterials');
+            }else {
+                stageData.updateStage(id,name);
+                $location.path('/materialsStage');
+                
+            }
+        }
+        else {
         stageData.updateStage(id,name);
-        $location.path('/addMaterials');
+        $location.path('/materialsStage');
+            
         }
     };
     
-    var work = workData.getWork();
-    var work_id = work.id;
+
     $scope.name=work.name;
     $scope.items = [];
     var materials = [];
@@ -1042,19 +1095,20 @@ $scope.createUser = function(type,icode){
 
 
 
-
+// definicion del controller para los materiales ya registrados en una etapa especifica
 app.controller('MaterialsStageCtrl', function(stageData, $scope, $http,loginData, workData) {
     var materials = [];
     
-    var stage = stageData.getStage();
+    var stage = stageData.getStage();// recupera datos del sstage
     $scope.name=stage.name;
     var stage_id = stage.id;
     
-    var work = workData.getWork();
+    var work = workData.getWork();// recupera datos del work
     var work_id = work.id;
     
-    var login = loginData.getLogin();
-    var type=login.menutype;  
+    var login = loginData.getLogin();//recupera datos del login
+    
+    var type=login.menutype;  //verifica el tipo de usuario, para los permisos 
         for ( i= 0; i< type.length; i++ )  {
          if (type[i]==0){
              $scope.user=true;
@@ -1068,7 +1122,7 @@ app.controller('MaterialsStageCtrl', function(stageData, $scope, $http,loginData
     $scope.items = [];
     itemsFinal=$scope.itemsFinal=[];
                
-    request = request.concat(ip, peticion,","stage_id,",",work_id);
+    request = request.concat(ip, peticion,"/",stage_id,"/",work_id);
     console.log("Request es:", request);
     $scope.update = function() {
         itemsFinal=$scope.itemsFinal=[];
@@ -1174,59 +1228,47 @@ app.controller('MaterialsStageCtrl', function(stageData, $scope, $http,loginData
     
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// se define un service que permite conservar la informacion del login para pasarlo entre controllers
 .service('loginData', function() {
 return {
 login: {},
-getLogin: function() {
+getLogin: function() {// para recuperar los datos 
  return this.login;
 },
-updateLogin: function(login,id,name,username,menutype) {
-   this.login = login;
+updateLogin: function(login,id,name,username,menutype) {// para actualizar los datos del login, y definir el tipo de menu segun tipo de usuario
+   this.login = login;// username, password
    this.login.id=id;
    this.login.name=name;
    this.login.username=username;
-   this.login.menutype=menutype;
+   this.login.menutype=menutype;// tipo de menu segun permisos de del tipo de usuarios
 }
 }
 }) 
 
 
-.service('workData', function() {
+
+// se define un service que permite conservar la informacion de un work especifico para pasarlo entre controllers
+.service('workData', function() {// fefinicion
 return {
 work: {},
-getWork: function() {
+getWork: function() {// para recuperar los datos 
  return this.work;
 },
-updateWork: function(id,name) {
+updateWork: function(id,name) {// para actualizar los datos del work
    this.work.id=id;
     this.work.name=name;
 }
 }
 })  
 
+// se define un service que permite conservar la informacion de un stage especifico para pasarlo entre controllers
 .service('stageData', function() {
 return {
 stage: {},
-getStage: function() {
+getStage: function() {// para recuperar los datos 
  return this.stage;
 },
-updateStage: function(id,name) {
+updateStage: function(id,name) {// para actualizar los datos del stage
    this.stage.id=id;
     this.stage.name=name;
 }
@@ -1234,6 +1276,8 @@ updateStage: function(id,name) {
 }) 
 
 
+
+// se define un template del menu, que permite el utilizarlo en todas las vistas que lo requiere
 app.directive('menu', function() {
 return {
  templateUrl: 'templates/menu.html',

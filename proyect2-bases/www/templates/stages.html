@@ -22,9 +22,11 @@
               </h4></li>
            </ul>
             <button ng-if="user" type="button" class="btn btn-info btn-block" ng-click="update()"> Update Stages</button>
+    <br><br>
+    <button ng-if="user" type="button" class="btn btn-info btn-block" ng-click="updatebto()"> Add More Stages </button>
     </div>
     
-        <button ng-if="user" type="button" class="btn btn-info btn-block" ng-click="updatebto()"> Add More Stages </button>    
+            
         <div class="jumbotron" ng-if="user&&bto">
         <h2 ALIGN="center"> Default stages</h2>
         <form autocomplete="off" id="myForm3" method="post">

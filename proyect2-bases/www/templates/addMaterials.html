@@ -1,6 +1,6 @@
 <div menu></div>
 <div class="container" >
-        <div class="jumbotron" ng-if="user">
+        <div class="jumbotron">
             <h2 ALIGN="center"> Add Meterials to {{name}}</h2>
 <nav>
     <input type="search"
@@ -23,16 +23,6 @@
 
 
  <h2 ALIGN="center"> My Materials </h2>
-<nav>
-    <input type="search"
-     placeholder="Search for a product..."
-     ng-model="search"
-     ng-bind="search"
-     ng-focus="searchFocused = true"
-     ng-blur="searchFocused = false"
-     ng-change="scrollTop()"
-     class="full-width white-background">
-</nav>
 <ul ng-init="update()">           
    <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
             ng-class="{'item-divider': item.isLetter}"
@@ -48,12 +38,5 @@
         </form>
     <button type="button" class="btn btn-info btn-block" ng-click="sell()"> Asociate Materials</button>
     </div>
-
-
-    <div class="jumbotron" ng-if="!user">
-        <h2 ALIGN="center"> Registed Materials of {{name}}</h2>
-
-        
-</div>  
 
 </div>
