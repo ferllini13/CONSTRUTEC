@@ -115,7 +115,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 })
 
 // se define el controlador para el menu
-app.controller('MenuCtrl', function($scope,loginData) {
+app.controller('MenuCtrl', function($scope,$state,loginData) {
 $scope.login = loginData.getLogin();// recupera los datos del login
 console.log($scope.login.username);    
 //se definen las variables de control para los permisos
@@ -140,6 +140,11 @@ for ( i= 0; i< type.length; i++ )  {
      $scope.admi=true;
  }
 }
+    
+    $scope.login = loginData.getLogin();
+    $scope.logOut = function(){
+        $state.go('login');
+    };
     
 })
 
@@ -837,6 +842,7 @@ app.controller('AddMaterialsCtrl', function(stageData, $scope, $http,loginData,w
     console.log("Request es:", request);
     $scope.update = function() {
         $scope.items = [];
+        materials = [];
         itemsFinal=$scope.itemsFinal=[];
     $http.get(request)
             .then(function (response) {

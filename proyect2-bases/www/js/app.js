@@ -777,6 +777,7 @@ app.controller('AddMaterialsCtrl', function(stageData, $scope, $http,loginData,w
     request = request.concat(ip, peticion);
     console.log("Request es:", request);
     $scope.update = function() {
+        materials = [];
         $scope.items = [];
         itemsFinal=$scope.itemsFinal=[];
     $http.get(request)
