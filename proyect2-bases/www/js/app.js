@@ -1,6 +1,6 @@
 var app = angular.module('App', ['ngRoute']);
 
-var ip = "http://172.26.100.221:8080/Construtec.asmx/";// ip necesaria para acceso al webservice:: cambiar ip segun host
+var ip = "http://192.168.43.210:8080/Construtec.asmx/";// ip necesaria para acceso al webservice:: cambiar ip segun host
 
 
 
@@ -759,6 +759,7 @@ app.controller('AddMaterialsCtrl', function(stageData, $scope, $http,loginData,w
             console.log("Get Post status", result);
             if (result=="[]"){
                 alert("Asignation Acomplish");
+                
             }
             else{
                 alert("Stage already have material");
