@@ -411,21 +411,22 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
                     console.log("Get Post status", result);
                     var result2 = angular.fromJson(result);
                     console.log("Get Post status 2", result2);
-                 });
-            if (result=="[]"){
-                stageData.updateStage(id,name);
-                $location.path('/addMaterials');
+                
+                    if (result=="[]"){
+                        stageData.updateStage(id,name);
+                        $location.path('/addMaterials');
+                    }else {
+                        stageData.updateStage(id,name);
+                    $location.path('/materialsStage');
+                
+                    }
+             });
             }else {
                 stageData.updateStage(id,name);
-                $location.path('/materialsStage');
+                $location.path('/materialsStage'); 
+                }
                 
-            }
-        }
-        else {
-        stageData.updateStage(id,name);
-        $location.path('/materialsStage');
-            
-        }
+        
     };
     
 

@@ -3,7 +3,7 @@
         app.factory('MaterialsControl', function(){
         var items = [];
             return {
-               list: function($http, $scope){
+                list: function($http, $scope){
                     return items;
                     
                 },
