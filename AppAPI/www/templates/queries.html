@@ -1,0 +1,38 @@
+<div menu></div>
+<div class="container" >
+    
+    <div class="jumbotron">
+                    <h3>Insert a material name</h3>
+                
+                        <form autocomplete="off" id="myForm2" method="post" >
+                        <input type="text" placeholder=" Material name" required="required" ng-model="mat.name" value="" class="input-user" style="color:#000000">
+                        <button type="button" class="btn btn-warning btn-block" ng-click="nombreMat(mat.name)"> Search </button>
+                    </form>
+                
+                </div>
+    
+    
+        <div class="jumbotron">
+        <h2 ALIGN="center"> Search materials that end in 15 days with that name</h2>
+            
+        <nav>
+            <input type="search"
+             placeholder="Search for a product..."
+             ng-model="search"
+             ng-bind="search"
+             ng-focus="searchFocused = true"
+             ng-blur="searchFocused = false"
+             ng-change="scrollTop()"
+             class="full-width white-background">
+        </nav>
+      <!--<button  ng-if="search.length"  class="button button-icon ion-android-close input-button"  ng-click="clearSearch()"></button>-->
+       <ul ng-init="update()">           
+           <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
+                    ng-class="{'item-divider': item.isLetter}"
+                    ng-repeat="item in getItems(search)">
+           {{item.letter || (item._description+ ' ('+ item._id+ ')'+'  ; Department :' +  item._office + '  ;  Tax : ' +item. _nonTaxable+ '  ; In Stock: ' +item._amount )}}
+              </h4></li>
+           </ul>
+            <button type="button" class="btn btn-info btn-block" ng-click="update()"> Update Materials</button>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<ion-view view-title="Select Works">
+    
+    <ion-content class="backgroundLogin">
+
+            
+        <nav>
+            <input type="search"
+             placeholder="Search for a product..."
+             ng-model="search"
+                ng-bind="search"
+               ng-focus="searchFocused = true"
+             ng-blur="searchFocused = false"
+             ng-change="scrollTop()"
+                class="full-width white-background">
+        </nav>
+      <!--<button  ng-if="search.length"  class="button button-icon ion-android-close input-button"  ng-click="clearSearch()"></button>-->
+       <ul ng-init="update()">           
+           <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
+                    ng-class="{'item-divider': item.isLetter}"
+                    ng-repeat="item in getItems(search)" ng-click=stages(item.id,item.c_location)>
+                   {{item.letter || (item.c_location+ ' ('+ item.id+ ')')}} 
+              </h4></li>
+           </ul>
+            <button type="button" class="btn btn-info btn-block" ng-click="update()"> Update Works</button>
+    </div>
+
+<div class="jumbotron" ng-if="user">
+                    <h3>Create a new Work</h3>
+                
+                        <form autocomplete="off" id="myForm2" method="post" >
+                        <input type="text" placeholder=" Work Location" required="required" ng-model="work.location" value="" class="input-user" style="color:#000000">
+                        <div class="form-group" style="color:#ffffff">
+                            <label style="color:#000000" for="sel1" >Select the Cliente type:</label>
+                            <select ng-init="getUsers()" ng-click="getUsers()" ng-model="client" required="required" class="form-control" id="sel1">
+                                 <option ng-repeat="it in items2" value=item.id>{{(it._name)+" "+(it.lastname)+"@"+(it.username)}}</option>
+                            </select>
+                        </div>    
+                            
+                            
+                            
+                        <button type="button" class="btn btn-warning btn-block" ng-click="addWork(work.location,client)"> Add Work</button>
+                    </form>
+                
+
+
+    </ion-contebnt>
+    
+</ion-view>
