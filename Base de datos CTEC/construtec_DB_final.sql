@@ -1,0 +1,100 @@
+﻿CREATE TABLE general_user
+(
+  id integer NOT NULL,
+  _name character varying NOT NULL,
+  lastname character varying,
+  identity_number character varying NOT NULL,
+  pastword character varying NOT NULL,
+  username character varying NOT NULL,
+  cell_phone_number character varying,
+  code integer,
+  CONSTRAINT gupk PRIMARY KEY (id),
+  CONSTRAINT general_user_cell_phone_number_key UNIQUE (cell_phone_number),
+  CONSTRAINT general_user_code_key UNIQUE (code),
+  CONSTRAINT general_user_identity_number_key UNIQUE (identity_number),
+  CONSTRAINT general_user_username_key UNIQUE (username)
+);
+
+CREATE TABLE rol
+(
+  id integer NOT NULL,
+  _type integer NOT NULL,
+  CONSTRAINT rpk PRIMARY KEY (id)
+);
+
+CREATE TABLE construction
+(
+  id integer NOT NULL,
+  c_location character varying,
+  client_id integer,
+  ing_id integer,
+  CONSTRAINT cpk PRIMARY KEY (id),
+  CONSTRAINT construction_client_id_fkey FOREIGN KEY (client_id)
+      REFERENCES general_user (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE,
+   CONSTRAINT construction_ing_id_fkey FOREIGN KEY (ing_id)
+      REFERENCES general_user (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE
+);
+
+CREATE TABLE stage
+(
+  id integer NOT NULL,
+  description character varying NOT NULL,
+  CONSTRAINT spk PRIMARY KEY (id)
+);
+
+CREATE TABLE material
+(
+  id character varying NOT NULL,
+  m_name character varying NOT NULL,
+  CONSTRAINT mpk PRIMARY KEY (id)
+);
+
+CREATE TABLE user_rol
+(
+  user_id integer,
+  rol_id integer,
+  CONSTRAINT user_rol_rol_id_fkey FOREIGN KEY (rol_id)
+      REFERENCES rol (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT user_rol_user_id_fkey FOREIGN KEY (user_id)
+      REFERENCES general_user (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+ CONSTRAINT user_rol_pkey PRIMARY KEY (user_id,rol_id)
+);
+
+CREATE TABLE construction_stage
+(
+  construcion_id integer NOT NULL,
+  stage_id integer NOT NULL,
+  start_day character varying NOT NULL,
+  finish_day character varying NOT NULL,
+  wish_id character varying,
+  _comment character varying,
+  CONSTRAINT construction_stage_construcion_id_fkey FOREIGN KEY (construcion_id)
+      REFERENCES construction (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT construction_stage_stage_id_fkey FOREIGN KEY (stage_id)
+      REFERENCES stage (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+   CONSTRAINT construction_stage_pkey PRIMARY KEY (construcion_id,stage_id)
+);
+
+CREATE TABLE stage_materials
+(
+  stage_id integer,
+  material_id character varying,
+  c_id integer,
+  quantity integer,
+  CONSTRAINT stage_materials_c_id_fkey FOREIGN KEY (c_id)
+      REFERENCES construction (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT stage_materials_material_id_fkey FOREIGN KEY (material_id)
+      REFERENCES material (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT stage_materials_stage_id_fkey FOREIGN KEY (stage_id)
+      REFERENCES stage (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+   CONSTRAINT stage_materials_c_pkey PRIMARY KEY (stage_id,material_id,c_id)
+);
