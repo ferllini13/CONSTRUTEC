@@ -20,9 +20,10 @@
            <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
                     ng-class="{'item-divider': item.isLetter}"
                     ng-repeat="item in getItems(search)">
-           {{item.letter || (item._wishId)}}
+           {{item.letter || "Id:  "+(item._wishId)+";  Office:  "+(item._office)+";   creationTime:   "+(item._creationTime) +";   #Items:  "+ (item.quantityOfProductSold) }}
               </h4></li>
            </ul>
+          <button type="button" class="btn btn-primary btn-block btn btn-warning" ng-click="update()">Update</button>
                 
          </div>
          

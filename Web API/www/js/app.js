@@ -99,23 +99,23 @@
                                 
                             
                             if (result2[0]._type===0){
-                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),0);   
+                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office,0);   
                                 $state.go('home'); 
                             }
                             else if(result2[0]._type===1){
-                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),1);   
+                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office,1);   
                                 $state.go('myProducts');
                             }
                             else if(result2[0]._type===2){
-                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),2);     
+                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office,2);     
                                 $state.go('orders');
                             }
                             else if(result2[0]._type===3){
-                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),3);   
-                                $state.go('stadistic');
+                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office,3);   
+                                $state.go('orders');
                             }
                             else if(result2[0]._type===4){
-                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office.toString().replace(" ", "%20"),4);   
+                                loginData.updateLogin(login,result2[0]._id,result2[0]._name,result2[0]._office,4);   
                                 $state.go('stadistic');
                             }    
                             }
