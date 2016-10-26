@@ -1,6 +1,6 @@
 var app = angular.module('App', ['ngRoute']);
 
-var ip = "http://172.19.13.1:8080/Construtec.asmx/";// ip necesaria para acceso al webservice:: cambiar ip segun host
+var ip = "http://192.168.0.30:8080/Construtec.asmx/";// ip necesaria para acceso al webservice:: cambiar ip segun host
 
 
 
@@ -390,7 +390,7 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
     $scope.items2=[];  
     request2 = request2.concat(ip, peticion2);
     console.log("Request es:", request2);
-    $http.get(request)
+    $http.get(request2)
             .then(function (response) {
             console.log('Get Post', response);
             console.log("Get Post status", response.data);

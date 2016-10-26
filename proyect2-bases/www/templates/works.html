@@ -29,17 +29,16 @@
                 
                         <form autocomplete="off" id="myForm2" method="post" >
                         <input type="text" placeholder=" Work Location" required="required" ng-model="work.location" value="" class="input-user" style="color:#000000">
-                        <input type="text" placeholder=" Work Client" required="required" ng-model="work.client" value="" class="input-user" style="color:#000000">
                         <div class="form-group" style="color:#ffffff">
-                            <label for="sel1" >Select the Cliente type:</label>
-                            <select ng-init="getUsers()" ng-model="type" required="required" class="form-control" id="sel1">
-                                 <option ng-click="print(item.id)" ng-repeat="item in items2" value={{item.id}}>nombre</option>
+                            <label style="color:#000000" for="sel1" >Select the Cliente type:</label>
+                            <select ng-init="getUsers()" ng-click="getUsers()" ng-model="client" required="required" class="form-control" id="sel1">
+                                 <option ng-repeat="it in items2" value=item.id>{{(it._name)+" "+(it.lastname)+"@"+(it.username)}}</option>
                             </select>
                         </div>    
                             
                             
                             
-                        <button type="button" class="btn btn-warning btn-block" ng-click="addWork(work.location,work.client)"> Add Work</button>
+                        <button type="button" class="btn btn-warning btn-block" ng-click="addWork(work.location,client)"> Add Work</button>
                     </form>
                 
                 </div>
