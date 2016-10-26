@@ -149,6 +149,10 @@ for ( i= 0; i< type.length; i++ )  {
 
 // se define el controlador que permite ver todos los materiales existentes
 app.controller('MaterialsCtrl', function($http, $scope) {
+    $scope.goBack = function(){ 
+        window.history.back();
+    };
+    
     var peticion = "ConsutaMateriales";// peticion necesaria para pedir todos los materiales en epatec del web service 
     var request = "";// string que concatena el request completo
     
@@ -265,6 +269,10 @@ app.controller('MaterialsCtrl', function($http, $scope) {
 
 
 app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData) {
+    $scope.goBack = function(){ 
+        window.history.back();
+    };
+    
     $scope.form = document.getElementById("myForm2");
     $scope.user=false;
     
@@ -452,6 +460,10 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
 })
 
 app.controller('StagesCtrl', function($http, $scope, $location, workData, stageData,loginData) {
+    $scope.goBack = function(){ 
+        window.history.back();
+    };
+    
     $scope.bto=false;
     $scope.user=false;
     $scope.form = document.getElementById("myForm3");
@@ -751,6 +763,10 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
 
 
 app.controller('AddMaterialsCtrl', function(stageData, $scope, $http,loginData,workData) {
+    $scope.goBack = function(){ 
+        window.history.back();
+    };
+    
     var materials = [];
     $scope.user=false;
     itemsFinal=$scope.itemsFinal=[];
@@ -947,6 +963,10 @@ app.controller('AddMaterialsCtrl', function(stageData, $scope, $http,loginData,w
 
 
 app.controller('QueriesCtrl', function($scope, $http) {
+    $scope.goBack = function(){ 
+        window.history.back();
+    };
+    
         
     $scope.items2 = [];
     
@@ -1151,6 +1171,10 @@ $scope.createUser = function(type,icode){
 
 // definicion del controller para los materiales ya registrados en una etapa especifica
 app.controller('MaterialsStageCtrl', function(stageData, $scope, $http,loginData, workData) {
+    $scope.goBack = function(){ 
+        window.history.back();
+    };
+    
     var materials = [];
     
     var stage = stageData.getStage();// recupera datos del sstage
