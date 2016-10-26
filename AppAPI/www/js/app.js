@@ -1,4 +1,4 @@
-var app = angular.module('App', ['ngRoute']);
+var app = angular.module('App', ['ionic']);
 
 var ip = "http://192.168.0.30:8080/Construtec.asmx/";// ip necesaria para acceso al webservice:: cambiar ip segun host
 
@@ -20,68 +20,102 @@ function server_request($http, request) {
 
 
 //se definen las views, las rutas de cada una y el controlador correspondiente
-app.config(['$routeProvider', function($routeProvider, $urlRouterProvider) {
-
-    $routeProvider
-        .when('/login', { //para la vista de login
+app.config(function($stateProvider, $urlRouterProvider){
+    $stateProvider
+        .state('login', {
+            url: '/login',
             templateUrl: 'templates/login.html',//url con la que se accesa a login
             controller: 'loginController'// controlador de la vista del login
         
         })
     
         // se definen igual que para login las demas views
-        .when('/signUp', {
+        .state('signUp', {
+            url: '/signUp',
             controller: 'SignUpCtrl',
             templateUrl:'templates/signUp.html'
         })
+            .state('menu', {
+                url:'/menu',
+                abstract: true,         
+                controller: 'MenuCtrl',
+                templateUrl:'templates/menu.html'
+            })
         //par al view de about
-        .when('/about',{
-            controller: 'AboutCtrl',
-            templateUrl:'templates/about.html'
+        .state('menu.about',{
+            url: '/about',
+            views: {
+                    'menuContent': {
+                        controller: 'AboutCtrl',
+                        templateUrl:'templates/about.html'
+                    }
+                } 
+            
             })
         //para el view de materiales   
-        .when('/materials',{
-            controller: 'MaterialsCtrl',
-            templateUrl:'templates/materials.html'
+        .state('menu.materials',{
+            url: '/materials',
+            views: {
+                    'menuContent': {
+                        controller: 'MaterialsCtrl',
+                        templateUrl:'templates/materials.html'
+                    }
+                }
+            
             })
     
         // para el view de las obras
-        .when('/works',{
-            controller: 'WorksCtrl',
-            templateUrl:'templates/works.html'
+        .state('menu.works',{
+            url: '/works',
+        views: {
+                    'menuContent': {
+                        controller: 'WorksCtrl',
+                        templateUrl:'templates/works.html'
+                    }
+                }
+            
             })
         // para el view de las etapas
-        .when('/stages',{
+        .state('stages',{
+            url: '/stages',
             controller: 'StagesCtrl',
-            templateUrl:'templates/stages.html'
+            templateUrl:'templates/stages.html'      
             })
     
         //para el view de las queries del usuario general
-        .when('/queries',{
-            controller: 'QueriesCtrl',
-            templateUrl:'templates/queries.html'
+        .state('menu.queries',{
+            url: '/queries',
+        views: {
+                    'menuContent': {
+                        controller: 'QueriesCtrl',
+                        templateUrl:'templates/queries.html'
+                    }
+                }
+            
             })
     
         //para el view que agrega materiales a una etapa
-        .when('/addMaterials',{
+        .state('addMaterials',{
+            url: '/addMaterials',
             controller: 'AddMaterialsCtrl',
-            templateUrl:'templates/addMaterials.html'
+          templateUrl:'templates/addMaterials.html'               
+            
             })
     
         //para el view que muestra los materiales en una etapa
-        .when('/materialsStage',{
+        .state('materialsStage',{
+            url: '/materialsStage',
             controller: 'MaterialsStageCtrl',
             templateUrl:'templates/materialsStage.html'
+
             })
         // para iniciar directamente en el login
-         .otherwise({
-            redirectTo: '/login'
-        });
+         $urlRouterProvider.otherwise('/login');
 
-}])
+})
 
 // se define el controlador para el menu
-app.controller('MenuCtrl', function($scope,loginData) {
+app.controller('MenuCtrl', function($scope,$state,loginData) {
 $scope.login = loginData.getLogin();// recupera los datos del login
 console.log($scope.login.username);    
 //se definen las variables de control para los permisos
@@ -106,6 +140,11 @@ for ( i= 0; i< type.length; i++ )  {
      $scope.admi=true;
  }
 }
+    
+    $scope.login = loginData.getLogin();
+    $scope.logOut = function(){
+        $state.go('login');
+    };
     
 })
 
@@ -227,7 +266,7 @@ app.controller('MaterialsCtrl', function($http, $scope) {
 
 
 app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData) {
-    var form2 = document.getElementById("Form2");
+    $scope.form = document.getElementById("myForm2");
     $scope.user=false;
     
     $scope.stages = function(id,name) {
@@ -276,7 +315,7 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
     
     
     $scope.print=function(id){
-      //cosole.log("ESTE ES EL PUTO ID DE MIERDA  ",id);  
+      cosole.log("ESTE ES EL PUTO ID DE MIERDA  ",id);  
     };
     
     
@@ -378,7 +417,7 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
                 alert("Error: server conection");
             }else {
                 alert("Work Creadted");
-                document.getElementById("Form2").reset();
+                $scope.form.reset();
                 $scope.update();
     }
   })}
@@ -416,6 +455,8 @@ app.controller('WorksCtrl', function($location,$http, $scope, workData,loginData
 app.controller('StagesCtrl', function($http, $scope, $location, workData, stageData,loginData) {
     $scope.bto=false;
     $scope.user=false;
+    $scope.form = document.getElementById("myForm3");
+    $scope.form2 = document.getElementById("myForm2");
     var work = workData.getWork();
     var work_id = work.id;
     var login = loginData.getLogin();
@@ -426,12 +467,11 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
          }
     }
     $scope.addMaterials = function(id,name) {
-            
-        if ($scope.user){       
+                
             var peticion = "ListarMaterialesEtapa?datos=";
             var request = "";
     
-            
+
             request = request.concat(ip, peticion,id,"/",work_id);
             console.log("Request es:", request);
             $http.get(request)
@@ -441,7 +481,7 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
                     var data = response.data;
                     var result = data.substring(76, data.length - 9);
                     console.log("Get Post status", result);
-
+                
                     if (result=="[]"){
                         stageData.updateStage(id,name);
                         $location.path('/addMaterials');
@@ -455,11 +495,7 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
                 
                     }
              });
-        }else{
-            stageData.updateStage(id,name);
-            $location.path('/materialsStage');
                 
-        }
         
     };
     
@@ -535,15 +571,38 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
             var result2 = angular.fromJson(result);
             console.log("Get Post status 2", result2);
             for(var i in result2) {
-                $scope.items.push(result2[i]);
+            $scope.items.push(result2[i]);
             }
-                var result3 = $scope.items;
-                console.log("Result3 ", result3);
+            var result3 = $scope.items;
+            console.log("Result3 ", result3);
             }
 
  });
         
-   
+        /*var peticion2 = "PresupuestoTotal?datos=";
+        var request = "";
+        console.log("este es el id",work_id)
+        request = request.concat(ip, peticion2,work_id);
+        console.log("Request supra-experimental es:", request);
+    $http.get(request)
+            .then(function (response) {
+            console.log('Get Post', response);
+            console.log("Get Post status", response.data);
+            var data = response.data;
+            var result = data.substring(76, data.length - 9);
+            console.log("Get Post status", result);
+        
+            if (result=="no se pudo establecer la conexión de la base de datos"){
+             alert("error: click update");   
+            }else{
+            var result2 = angular.fromJson(result);
+            console.log("Get Post status 2", result2);
+            $scope.precioFinal = result2[0].total;
+            }
+
+ });*/
+       
+        
         
         for(i = 0; i < $scope.items.length; i++) {
             evitaHilos(i);
@@ -681,8 +740,8 @@ app.controller('StagesCtrl', function($http, $scope, $location, workData, stageD
             }else {
                 $scope.update();
                 alert("Stage Creadted");
-                document.getElementById("myForm3").reset();
-                document.getElementById("myForm2").reset();
+                $scope.form.reset();
+                $scope.form2.reset();
 
             }
                   })
@@ -757,12 +816,8 @@ app.controller('AddMaterialsCtrl', function(stageData, $scope, $http,loginData,w
             var data = response.data;
             var result = data.substring(76, data.length - 9);
             console.log("Get Post status", result);
-            if (result=="[]"){
-                alert("Asignation Acomplish");
-            }
-            else{
-                alert("Stage already have material");
-            }
+            var result2 = angular.fromJson(result);
+            console.log("Get Post status 2", result2);
     })
     };
     
@@ -786,8 +841,8 @@ app.controller('AddMaterialsCtrl', function(stageData, $scope, $http,loginData,w
     request = request.concat(ip, peticion);
     console.log("Request es:", request);
     $scope.update = function() {
-        materials = [];
         $scope.items = [];
+        materials = [];
         itemsFinal=$scope.itemsFinal=[];
     $http.get(request)
             .then(function (response) {
@@ -1018,7 +1073,7 @@ app.controller('AboutCtrl', function() {
 
 
 
-app.controller('loginController', function($scope,$http, loginData, $location) {
+app.controller('loginController', function($scope, $state, $http, loginData) {
     console.log(ip);
     $scope.login = {username:'', password:'',name:'',id:'',code:'' ,menutype:'' }
     var form = document.getElementById("myForm");  
@@ -1050,7 +1105,7 @@ $scope.verificar =  function(login){
                             var result2 = angular.fromJson(result);
                             console.log("Get Post status 2", result2);
 
-                            updateRoles(login,result2[0].id,result2[0]._name,result2[0].username, result,loginData, $location)
+                            updateRoles(login,result2[0].id,result2[0]._name,result2[0].username, result,loginData)
 
                         }
 
@@ -1058,7 +1113,7 @@ $scope.verificar =  function(login){
 }
 
 
-function updateRoles(login,id,name, username, result,loginData,$location){
+function updateRoles(login,id,name, username, result,loginData){
     var rol = [];
     
     var peticion = "ListarRolesUsuario?datos="
@@ -1081,22 +1136,22 @@ function updateRoles(login,id,name, username, result,loginData,$location){
 
             if (rol[0]===0){  
             loginData.updateLogin(login,id,name,username,rol);
-            $location.path('/works');
+                $state.go('menu.works'); 
             }
 
             else if (rol[0]===1){    
             loginData.updateLogin(login,id,name,username,rol);
-            $location.path('/works');
+                $state.go('menu.works'); 
             }
 
             else if (rol[0]===2){    
             loginData.updateLogin(login,id,name,username,rol);
-            $location.path('/materials');
+                $state.go('menu.materials'); 
             }
 
             else if (rol[0]===3){    
             loginData.updateLogin(login,id,name,username,rol);
-            $location.path('/materials');
+                $state.go('menu.materials'); 
             }
          }); 
 
@@ -1262,6 +1317,7 @@ app.controller('MaterialsStageCtrl', function(stageData, $scope, $http,loginData
       itemsFinal.push(item);
     });
     }
+    
     $scope.getItemsCart = materials;
     
     $scope.getItems = function(search) {

@@ -1,0 +1,95 @@
+<ion-view view-title="Stages">
+    
+    <ion-content class="backgroundLogin">
+
+        <h1 ALIGN="center" style="color:#ffffff">Stages of {{name}}</h1>
+        <div class="jumbotron">
+            
+        <nav>
+            <input type="search"
+             placeholder="Search for a product..."
+             ng-model="search"
+                ng-bind="search"
+               ng-focus="searchFocused = true"
+             ng-blur="searchFocused = false"
+             ng-change="scrollTop()"
+                class="full-width white-background">
+        </nav>
+      <!--<button  ng-if="search.length"  class="button button-icon ion-android-close input-button"  ng-click="clearSearch()"></button>-->
+       <ul ng-init="update()">      
+           <h4><li class="list-group-item ist-group-item-success" id="{{ item.isLetter ? (item.letter + '_divider') : ''}}" 
+                    ng-class="{'item-divider': item.isLetter}"
+                    ng-repeat="item in getItems(search)" ng-click=addMaterials(item.id,item.description)>
+           {{item.letter || (item.description +' ( ' + ' Precio: ' + item.price + ')' )}}
+              </h4></li>
+            <h4><li class="list-group-item ist-group-item-success">
+           {{'Total Price: ' + precioFinal}}
+              </h4></li>
+           </ul>
+        
+            <button ng-if="user" type="button" class="btn btn-info btn-block" ng-click="update()"> Update Stages</button>
+    <br><br>
+    <button ng-if="user" type="button" class="btn btn-info btn-block" ng-click="updatebto()"> Add More Stages </button>
+    </div>
+    
+            
+        <div class="jumbotron" ng-if="user&&bto">
+        <h2 ALIGN="center"> Default stages</h2>
+        <form autocomplete="off" id="myForm3" method="post">
+
+                <input type="text" placeholder="Start Date (DD-MM-YY)" required="required" ng-model="stage.sdate1" value="" class="input-user" style="color:#000000">
+                <input type="text" placeholder="Finalization Date (DD-MM-YY)" required="required" ng-model="stage.fdate1" value="" class="input-user" style="color:#000000">
+            
+                <div class="form-group" style="color:#ffffff">
+                    <label for="sel1" style="color:#000000">Select a stage:</label>
+                    <select  ng-model="type" required="required" class="form-control" id="sel1">
+                         <option value="0">Trabajo Preliminar</option>
+                         <option value="1">Cimientos</option>
+                         <option value="2">Paredes</option>
+                        <option value="3">Concreto Reforzado</option>
+                        <option value="4">Techos</option>
+                        <option value="5">Cielos</option>
+                        <option value="6">Repello</option>
+                        <option value="7">Entrepisos</option>
+                        <option value="8">Pisos</option>
+                        <option value="9">Enchapes</option>
+                        <option value="10">Instalacion Pluvial</option>
+                        <option value="11">nstalacion Sanitaria</option>
+                        <option value="12">Instalacion electrica</option>
+                        <option value="13">Puertas</option>
+                        <option value="14">Cerrajeria</option>
+                        <option value="15">Ventanas</option>
+                        <option value="16">Closets</option>
+                        <option value="17">Mueble de pintura</option>
+                        <option value="18">Escaleras</option>
+                    </select>
+                </div>
+            
+                <button type="button" class="btn btn-warning btn-block" ng-click="addStage2(type,stage.sdate1,stage.fdate1)"> Add Stage </button>
+            </form>
+            
+            
+            
+            </div>
+
+        <div class="jumbotron" ng-if="user&&bto">
+        <h2 ALIGN="center"> Create a new Stage</h2>
+
+
+        <form autocomplete="off" id="myForm2" method="post">
+            <input type="text" placeholder="General Description" required="required" ng-model="stage.comment" value="" class="input-user" style="color:#000000">
+            <input type="text" placeholder="Start Date (DD-MM-YY)" required="required" ng-model="stage.sdate" value="" class="input-user" style="color:#000000">
+            <input type="text" placeholder="Finalization Date (DD-MM-YY)" required="required" ng-model="stage.fdate" value="" class="input-user" style="color:#000000">
+              <button type="button" class="btn btn-warning btn-block" ng-click="addStage(stage.comment,stage.sdate,stage.fdate)"> Add Stage </button>
+
+        </form>
+            
+            
+            
+    </div>
+
+    </div>
+
+    </ion-contebnt>
+    
+</ion-view>
