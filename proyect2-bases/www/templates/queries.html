@@ -2,12 +2,18 @@
 <div class="container" >
     
     <div class="jumbotron">
-                    <h3>Insert a material name</h3>
+                    <h3>Insert Material</h3>
                 
                         <form autocomplete="off" id="myForm2" method="post" >
                         <input type="text" placeholder=" Material name" required="required" ng-model="mat.name" value="" class="input-user" style="color:#000000">
-                        <button type="button" class="btn btn-warning btn-block" ng-click="nombreMat(mat.name)"> Search </button>
+                        <button type="button" class="btn btn-warning btn-block" ng-click="getWorks(mat.name)"> Search </button>
                     </form>
+        <h3>Works : </h3>
+		<ul>           
+                <h4><li ng-repeat="item in items2">
+                {{(item.c_location+ ' ('+ item.id+ ')')}}
+              </h4></li>
+           </ul>
                 
                 </div>
     

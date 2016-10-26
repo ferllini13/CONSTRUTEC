@@ -1,6 +1,6 @@
 var app = angular.module('App', ['ionic']);
 
-var ip = "http://192.168.0.30:8080/Construtec.asmx/";// ip necesaria para acceso al webservice:: cambiar ip segun host
+var ip = "http://172.19.13.1:8080/Construtec.asmx/";// ip necesaria para acceso al webservice:: cambiar ip segun host
 
 
 
@@ -16,7 +16,6 @@ function server_request($http, request) {
 
  });       
 }
-
 
 
 //se definen las views, las rutas de cada una y el controlador correspondiente
@@ -948,18 +947,18 @@ app.controller('AddMaterialsCtrl', function(stageData, $scope, $http,loginData,w
 
 
 app.controller('QueriesCtrl', function($scope, $http) {
-    var nombre = "";
-    $scope.nombreMat = function(name) {
-        nombre = name;
-    };
+        
+    $scope.items = [];
+    $scope.items2 = [];
+    itemsFinal=$scope.itemsFinal=[];
+    $scope.getWorks = function(name) {
+ 
     
     var peticion = "ProyectoConMaterialX?datos=";
     var request = "";
-    
-    $scope.items = [];
-    itemsFinal=$scope.itemsFinal=[];
+
                
-    request = request.concat(ip, peticion, nombre);
+    request = request.concat(ip, peticion, name);
     console.log("Request es:", request);
     $scope.update = function() {
         itemsFinal=$scope.itemsFinal=[];
@@ -973,15 +972,16 @@ app.controller('QueriesCtrl', function($scope, $http) {
             var result2 = angular.fromJson(result);
             console.log("Get Post status 2", result2);
             for(var i in result2) {
-            $scope.items.push(result2[i]);
+                $scope.items2.push(result2[i]);
             }
-            var result3 = $scope.items;
-            console.log("Result3 ", result3);
+                var result3 = $scope.items2;
+                console.log("Result3 ", result3);
 
  });
         
         addDelay();
       };
+};
     
     
     function addDelay() {
