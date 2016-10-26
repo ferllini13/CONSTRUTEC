@@ -1,6 +1,6 @@
 var app = angular.module('App', ['ionic']);
 
-var ip = "http://172.19.13.1:8080/Construtec.asmx/";// ip necesaria para acceso al webservice:: cambiar ip segun host
+var ip = "http://172.26.100.1:8080/Construtec.asmx/";// ip necesaria para acceso al webservice:: cambiar ip segun host
 
 
 
@@ -948,20 +948,17 @@ app.controller('AddMaterialsCtrl', function(stageData, $scope, $http,loginData,w
 
 app.controller('QueriesCtrl', function($scope, $http) {
         
-    $scope.items = [];
     $scope.items2 = [];
-    itemsFinal=$scope.itemsFinal=[];
+    
     $scope.getWorks = function(name) {
+    $scope.items2 = [];
  
     
     var peticion = "ProyectoConMaterialX?datos=";
     var request = "";
 
-               
     request = request.concat(ip, peticion, name);
     console.log("Request es:", request);
-    $scope.update = function() {
-        itemsFinal=$scope.itemsFinal=[];
     $http.get(request)
             .then(function (response) {
             console.log('Get Post', response);
@@ -978,90 +975,7 @@ app.controller('QueriesCtrl', function($scope, $http) {
                 console.log("Result3 ", result3);
 
  });
-        
-        addDelay();
-      };
-};
-    
-    
-    function addDelay() {
-        $scope.items
-        .sort(function(a, b) {
-      return a._description.toUpperCase().charCodeAt(0) > b._description.toUpperCase().charCodeAt(0) ? 1 : -1;
-    })
-    .forEach(function(item) {
-      //Get the first letter of the last name, and if the last name changes
-      //put the letter in the array
-        
-      var itemCharCode = item._description.toUpperCase().charCodeAt(0);
-        
-        
-        
-      if (itemCharCode < 65) {
-         itemCharCode = 35; 
-      }
-   
-      //We may jump two letters, be sure to put both in
-      //(eg if we jump from Adam Bradley to Bob Doe, add both C and D)
-      var difference = itemCharCode - currentCharCode;
-      for (var i = 1; i <= difference; i++) {
-        /*console.log(String.fromCharCode(currentCharCode));*/
-        addLetter(currentCharCode + i);;
-        
-      }
-      currentCharCode = itemCharCode;
-        console.log(item);
-      itemsFinal.push(item);
-    });
-    }
-    
-    
-    
-    $scope.getItems = function(search) {
-    $scope.items = itemsFinal;
-    $scope.search = search;
-    letterHasMatch = {};
-        
-    //Filter contacts by $scope.search.
-    //Additionally, filter letters so that they only show if there
-    //is one or more matching contact
-    return itemsFinal.filter(function(item) {
-      var itemDoesMatch = !$scope.search || item.isLetter ||
-        item._description.toLowerCase().indexOf($scope.search.toLowerCase()) > -1
-      //console.log(item.last_name.toString().charAt(0));
-      
-      //Mark this person's last name letter as 'has a match'
-      if (!item.isLetter && itemDoesMatch) {
-
-        var letter = item._description.charAt(0).toUpperCase();
-        if ( item._description.charCodeAt(0) < 65 ){
-          letter = "#";
-        }
-        letterHasMatch[letter] = true;
-      }
-
-      return itemDoesMatch;
-    }).filter(function(item) {
-      //Finally, re-filter all of the letters and take out ones that don't
-      //have a match
-      if (item.isLetter && !letterHasMatch[item.letter]) {
-        return false;
-      }
-      return true;
-    });
-  };
-    
-    
-    function addLetter(code) {
-    var letter = String.fromCharCode(code);
-
-    itemsFinal.push({
-      isLetter: true,
-      letter: letter
-    });
-   
-    letters.push(letter);
-  }
+      }; 
     
 })
 
