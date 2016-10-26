@@ -35,8 +35,8 @@
         <h2 ALIGN="center"> Default stages</h2>
         <form autocomplete="off" id="myForm3" method="post">
 
-                <input type="text" placeholder="Start Date (DD-MM-YY)" required="required" ng-model="stage.sdate1" value="" class="input-login" style="color:#000000">
-                <input type="text" placeholder="Finalization Date (DD-MM-YY)" required="required" ng-model="stage.fdate1" value="" class="input-login" style="color:#000000">
+                <input type="text" placeholder="Start Date (DD-MM-YY)" required="required" ng-model="stage.sdate1" value="" class="input-user" style="color:#000000">
+                <input type="text" placeholder="Finalization Date (DD-MM-YY)" required="required" ng-model="stage.fdate1" value="" class="input-user" style="color:#000000">
             
                 <div class="form-group" style="color:#ffffff">
                     <label for="sel1" style="color:#000000">Select a stage:</label>
@@ -75,9 +75,9 @@
 
 
         <form autocomplete="off" id="myForm2" method="post">
-            <input type="text" placeholder="General Description" required="required" ng-model="stage.comment" value="" class="input-login" style="color:#000000">
-            <input type="text" placeholder="Start Date (DD-MM-YY)" required="required" ng-model="stage.sdate" value="" class="input-login" style="color:#000000">
-            <input type="text" placeholder="Finalization Date (DD-MM-YY)" required="required" ng-model="stage.fdate" value="" class="input-login" style="color:#000000">
+            <input type="text" placeholder="General Description" required="required" ng-model="stage.comment" value="" class="input-user" style="color:#000000">
+            <input type="text" placeholder="Start Date (DD-MM-YY)" required="required" ng-model="stage.sdate" value="" class="input-user" style="color:#000000">
+            <input type="text" placeholder="Finalization Date (DD-MM-YY)" required="required" ng-model="stage.fdate" value="" class="input-user" style="color:#000000">
               <button type="button" class="btn btn-warning btn-block" ng-click="addStage(stage.comment,stage.sdate,stage.fdate)"> Add Stage </button>
 
         </form>
