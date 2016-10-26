@@ -27,12 +27,12 @@
 <div class="jumbotron" ng-if="user">
                     <h3>Create a new Work</h3>
                 
-                        <form autocomplete="off" id="myForm2" method="post" >
-                        <input type="text" placeholder=" Work Location" required="required" ng-model="work.location" value="" class="input-user" style="color:#000000">
+                        <form autocomplete="off" id="Form2" method="post" >
+                        <input type="text" placeholder=" Work Location" required="required" ng-model="work.location" ng-bind=variable value="" class="input-user" style="color:#000000">
                         <div class="form-group" style="color:#ffffff">
                             <label style="color:#000000" for="sel1" >Select the Cliente type:</label>
                             <select ng-init="getUsers()" ng-click="getUsers()" ng-model="client" required="required" class="form-control" id="sel1">
-                                 <option ng-repeat="it in items2" value=item.id>{{(it._name)+" "+(it.lastname)+"@"+(it.username)}}</option>
+                                 <option ng-repeat="it in items2" value={{it.id}} >{{(it._name)+" "+(it.lastname)+"@"+(it.username)}}</option>
                             </select>
                         </div>    
                             
