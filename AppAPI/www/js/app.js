@@ -1,6 +1,6 @@
 var app = angular.module('App', ['ionic']);
 
-var ip = "http://172.26.100.221:8080/Construtec.asmx/";// ip necesaria para acceso al webservice:: cambiar ip segun host
+var ip = "http://192.168.43.210:8080/Construtec.asmx/";// ip necesaria para acceso al webservice:: cambiar ip segun host
 
 
 
@@ -995,7 +995,65 @@ app.controller('QueriesCtrl', function($scope, $http) {
                 console.log("Result3 ", result3);
 
  });
-      }; 
+      };
+
+$scope.getWorks2 = function() {
+      $scope.items2 = [];
+ 
+    
+    var peticion = "Proyectosen15dias?datos=";
+    var request = "";
+
+    request = request.concat(ip, peticion,"2-10-16");
+    console.log("Request es:", request);
+    $http.get(request)
+            .then(function (response) {
+            console.log('Get Post', response);
+            console.log("Get Post status", response.data);
+            var data = response.data;
+            var result = data.substring(76, data.length - 9);
+            console.log("Get Post status", result);
+            var result2 = angular.fromJson(result);
+            console.log("Get Post status 2", result2);
+            for(var i in result2) {
+                $scope.items3.push(result2[i]);
+            }
+                var result3 = $scope.items3;
+                console.log("Result3 ", result3);
+
+ });  
+        
+        
+    };
+    
+    
+    $scope.coment = function(com,c,s) {
+        var peticion = "AgregarComentario?datos=";
+    var request = "";
+
+    request = request.concat(ip, peticion,c,"/",s,"/",com.replace(" ","%20"));
+    console.log("Request es:", request);
+    $http.get(request)
+            .then(function (response) {
+            console.log('Get Post', response);
+            console.log("Get Post status", response.data);
+            var data = response.data;
+            var result = data.substring(76, data.length - 9);
+            console.log("Get Post status", result);
+            var result2 = angular.fromJson(result);
+            console.log("Get Post status 2", result2);
+            if (result=="[]" ){
+                alert("coment added");
+                 document.getElementById("myForm4").reset();
+            }
+            else {
+                alert("error commenting");
+            }
+
+ });  
+        
+    };
+     
     
 })
 
