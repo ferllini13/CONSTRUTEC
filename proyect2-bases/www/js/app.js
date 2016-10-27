@@ -895,7 +895,7 @@ app.controller('AddMaterialsCtrl', function(stageData, $scope, $http,loginData,w
 
 app.controller('QueriesCtrl', function($scope, $http) {
     $scope.items2 = [];
-    $scope.item3=[];
+    $scope.items3 =[];
     
     $scope.getWorks = function(name) {
     $scope.items2 = [];
@@ -925,7 +925,7 @@ app.controller('QueriesCtrl', function($scope, $http) {
       }; 
     
     $scope.getWorks2 = function() {
-      $scope.items2 = [];
+      $scope.items3 = [];
  
     
     var peticion = "Proyectosen15dias?datos=";
@@ -969,13 +969,8 @@ app.controller('QueriesCtrl', function($scope, $http) {
             console.log("Get Post status", result);
             var result2 = angular.fromJson(result);
             console.log("Get Post status 2", result2);
-            if (result=="[]" ){
-                alert("coment added");
-                 document.getElementById("myForm4").reset();
-            }
-            else {
-                alert("error commenting");
-            }
+            alert("coment added");
+            document.getElementById("myForm4").reset();
 
  });  
         

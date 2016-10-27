@@ -34,7 +34,8 @@
         <h3>Works / Stage: </h3>
     <ul>           
                 <h4><li ng-click="coment(c.com,it.c_id,it.stage_id)" ng-repeat="it in items3">
-                {{(it.c_location+ ' ('+ it.c_id+ ')')+(it.description+ ' ('+ it.stage_id+ ')')}}
+                {{'Work: '+(it.c_location+ ' ('+ it.c_id+ ')')+'; Stage: ' +(it.description+ ' ('+ it.stage_id+ ')')}}
+                    <br> <br>
                     
               </h4></li>
            </ul>
